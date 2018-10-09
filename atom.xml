@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-10-08T08:58:16.359Z</updated>
+  <updated>2018-10-09T05:40:23.865Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,11 +17,34 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>快速幂算法</title>
+    <link href="http://yoursite.com/2018/10/09/%E5%BF%AB%E9%80%9F%E5%B9%82%E7%AE%97%E6%B3%95/"/>
+    <id>http://yoursite.com/2018/10/09/快速幂算法/</id>
+    <published>2018-10-09T02:56:15.000Z</published>
+    <updated>2018-10-09T05:40:23.865Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="快速幂算法"><a href="#快速幂算法" class="headerlink" title="快速幂算法"></a>快速幂算法</h2><h4 id="平方乘算法"><a href="#平方乘算法" class="headerlink" title="平方乘算法"></a>平方乘算法</h4><p>RSA 加解密中存在指数运算 X^a。通常解密运算中的指数非常大，a 的二进制位数通常会大于等于1024 bit，即可能 a &gt;= 2^1024。如果用一般方法直接计算 X^a 的值， 即 X*X*X……需要的运算量非常大，很容易溢出。</p><p>定义：MUL 为乘法运算即乘以 X，sq 为平方运算</p><p>考虑一个例子计算 X^8，则最简单的方法需要8次乘法运算<br><img src="http://blog.chinaunix.net/attachment/201612/7/28852942_1481110425d8oz.png" alt="img"></p><p>而更快捷的方法只需要3次平方运算<br><img src="http://blog.chinaunix.net/attachment/201612/6/28852942_1481029833JAX4.png" alt="img"><br>在看一个更一般的例子，计算 X^24，最简单的方法就是计算24次乘法。</p><p>更有效的方法如下：即一次平方操作，一次乘法操作(乘以 X)，之后再三次平放操作。 即5次操作即可得到结果<br><img src="http://blog.chinaunix.net/attachment/201612/6/28852942_1481030092Hl1m.png" alt="img"><br>也就是说对于指数运算两种基本操作就可以得到结果：对当前结果平方，当前结果与 X 相乘。问题是如何确定平方与乘法的执行顺序, 平方-乘算法就可以解决这个问题。</p><p><strong>大致描述为： 对 X^a  将指数 a 表示为2进制形式，高bit在左，然后从左至右扫描对应的 bit 位。除了最左边的 bit（MSB）以外，在扫描之后每个 bit 位时对当前结果平方，如果该bit位为1，则需多进行一次乘法操作</strong></p><p>以计算 X^24 为例：</p><blockquote><p>黑体表示二进制形式</p></blockquote><p>X^24 将指数表示为二进制形式 X^<strong>11000</strong> 表示为 X^<strong>b1b2b3b4b5</strong></p><p>开始扫描指数的每个Bit: </p><ol><li>初始值 X = X^<strong>1</strong>;                 初始化设置，<strong>b1</strong> = 1，扫描第一个bit时不需要做其他操作</li><li>X^2 = X^<strong>11</strong>                      <strong>b2</strong>=1，先平方 X^2*X = X^3 = X<strong>11</strong> ，再乘以 X</li><li>(X^3)^2 = X^6 = X^<strong>110</strong>          <strong>b3</strong>= 0，只需要一次平方</li><li>(X^6)^2 = X^12 = X^<strong>1100</strong>         <strong>b4</strong> = 0，只需要一次平方</li><li>(X^12)^2 = X^24 = X^<strong>11000</strong>     <strong>b5</strong> = 0,只需一次平方</li></ol><p>通过观察运算过程中指数的二进制表示的变化能更好的理解算法，一次平方操作会让指数向左移一位，并在最右边添加0，<br>而与 X 相乘的操作即在指数的最右边位置上填上 1 </p><h4 id="快速幂算法-1"><a href="#快速幂算法-1" class="headerlink" title="快速幂算法"></a>快速幂算法</h4><p><strong>所谓的快速幂，实际上是快速幂取模的缩写，简单的说，就是快速的求一个幂式的模(余)。在程序设计过程中，经常要去求一些大数对于某个数的余数，为了得到更快、计算范围更大的算法，产生了快速幂取模算法。</strong></p><p>快速幂实现基于引理：积的取余等于取余的积的取余，即：</p><p><strong>(a * b) mod n=(a mod n * b mod n) mod n</strong> </p><p>示例：4^24 mod 102 = 52</p><p>24 = <strong>11000</strong></p><p>4^24 mod 102     = ( ( ( ( (4^1)*(4^1)^2 ) ^2) ^2) ^2) mod 102</p><p>​                = ( ( ( 64 ^2) ^2) ^2) mod 102</p><p>​                = ( ( ( 64 ^2) ^2) mod 102) ^2 mod 102</p><p>​                = ( ( ( 64 ^2) mod 102)^2 mod 102) ^2 mod 102</p><p>​                = ( ( 256 mod 102)^2 mod 102) ^2 mod 102</p><p>​                = ( 52^2 mod 102) ^2 mod 102</p><p>​                =  ( 52^2) mod 102</p><p>​                = 52</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;快速幂算法&quot;&gt;&lt;a href=&quot;#快速幂算法&quot; class=&quot;headerlink&quot; title=&quot;快速幂算法&quot;&gt;&lt;/a&gt;快速幂算法&lt;/h2&gt;&lt;h4 id=&quot;平方乘算法&quot;&gt;&lt;a href=&quot;#平方乘算法&quot; class=&quot;headerlink&quot; title=&quot;平方乘
+      
+    
+    </summary>
+    
+    
+      <category term="密码学" scheme="http://yoursite.com/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/"/>
+    
+  </entry>
+  
+  <entry>
     <title>TCP/IP 详解（一） 网络基础知识</title>
     <link href="http://yoursite.com/2018/09/30/TCP-IP-%E8%AF%A6%E8%A7%A3%EF%BC%88%E4%B8%80%EF%BC%89-%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
     <id>http://yoursite.com/2018/09/30/TCP-IP-详解（一）-网络基础知识/</id>
     <published>2018-09-30T01:25:20.000Z</published>
-    <updated>2018-10-08T08:58:16.359Z</updated>
+    <updated>2018-10-09T02:12:56.722Z</updated>
     
     <content type="html"><![CDATA[<h2 id="TCP-IP-详解（一）-网络基础知识"><a href="#TCP-IP-详解（一）-网络基础知识" class="headerlink" title="TCP/IP 详解（一） 网络基础知识"></a>TCP/IP 详解（一） 网络基础知识</h2><h3 id="1-计算机网络发展"><a href="#1-计算机网络发展" class="headerlink" title="1. 计算机网络发展"></a>1. 计算机网络发展</h3><p>计算机发展是从<code>独立模式</code>到<code>网络互连模式</code>的。</p><p>​    独立模式：相当于单机模式</p><p>​    网络互联模式：将计算机连在一起，形成一个计算机网络，信息共享、传递消息等</p><p>计算机网络按规模划分（定义比较宽泛）</p><p>​    WAN（Wide Area Network，广域网）：覆盖多个远距离区域的远程网络</p><p>​    MAN（Metropolitan Area Network，城域网）：连接一个城市的网络</p><p>​    LAN（Local Area Network，局域网）：一幢楼、一个学校等</p><p>计算机网络发展的7个阶段</p><ol><li><p>批处理（Batch Processing）：20世纪50年代，事先将用户程序及数据装入卡带或磁带，并由计算机按照一定顺序读取，使用户所执行的这些程序和数据能够-并批量得到处理的方式（脱机、多道、成批处理）</p></li><li><p>分时系统（Time Sharing System，TSS）：20世纪60年代，多个终端与同一计算机连接，允许多个用户同时使用一台计算机。系统采用时间片轮转的办法在客观效果上用户批次感觉不到对方也在使用这台计算机，<code>好像</code>只有自己独占这台计算机一样（独占性、星型、交互性、多路性、及时性）</p><blockquote><p>这里的<code>终端</code>由输入输出设备（显示器、键鼠等）组成</p></blockquote></li><li><p>计算机之间的通信：20世纪70年代，计算机与计算机之间通信，传输数据</p></li><li><p>计算机网络的产生：20实际80年代，能够连接多种计算机（异构）的网络产生，窗口系统发明并与网络结合  -&gt;  网上冲浪</p><blockquote><p>窗口系统的发明使用户可以同时执行多个程序，还可以在这些程序之间自由的切换作业</p></blockquote></li><li><p>互联网的普及：20实际90年代，一人一机（成本不菲），推出“瘦身”、“多供应商连接”。</p><p>瘦身：用“轻量型”个人电脑或UNIX工作站取代大型主机，降低网络架构成本</p><p>多供应商连接：将各种软硬件供应商的产品组合起来搭建网络，降低网络环境成本（异构型计算机之间的连接）</p></li><li><p>以互联网为中心：2000年，从电话网到IP网</p></li><li><p>建立连接 -&gt; 安全建立连接（完善）：2010年，随着互联网的普及，网络安全问题愈发突出，建立连接发展为安全建立连接</p></li></ol><table><thead><tr><th>年代</th><th>内容</th></tr></thead><tbody><tr><td>20世纪50年代</td><td>批处理时代</td></tr><tr><td>20世纪60年代</td><td>分时系统时代</td></tr><tr><td>20世纪70年代</td><td>计算机通信时代</td></tr><tr><td>20世纪80年代</td><td>计算机网络时代</td></tr><tr><td>20世纪90年代</td><td>互联网普及时代</td></tr><tr><td>2000年</td><td>以互联网为中心时代</td></tr><tr><td>2010年</td><td>无论何时何地一切皆TCP/IP的网络时代</td></tr></tbody></table><h3 id="2-网络通信协议"><a href="#2-网络通信协议" class="headerlink" title="2. 网络通信协议"></a>2. 网络通信协议</h3><p>TCP/IP协议是通信协议的统称。</p><p>计算机网络最初的目的是连接一个个独立的计算机，使他们组成一个更强有力的计算环境（提高生产力），现代计算的首要目的是连接人与人。</p>]]></content>
     
