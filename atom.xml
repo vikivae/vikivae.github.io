@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-09-27T15:10:45.575Z</updated>
+  <updated>2018-10-08T08:58:16.359Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,52 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>TCP/IP 详解（一） 网络基础知识</title>
+    <link href="http://yoursite.com/2018/09/30/TCP-IP-%E8%AF%A6%E8%A7%A3%EF%BC%88%E4%B8%80%EF%BC%89-%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
+    <id>http://yoursite.com/2018/09/30/TCP-IP-详解（一）-网络基础知识/</id>
+    <published>2018-09-30T01:25:20.000Z</published>
+    <updated>2018-10-08T08:58:16.359Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="TCP-IP-详解（一）-网络基础知识"><a href="#TCP-IP-详解（一）-网络基础知识" class="headerlink" title="TCP/IP 详解（一） 网络基础知识"></a>TCP/IP 详解（一） 网络基础知识</h2><h3 id="1-计算机网络发展"><a href="#1-计算机网络发展" class="headerlink" title="1. 计算机网络发展"></a>1. 计算机网络发展</h3><p>计算机发展是从<code>独立模式</code>到<code>网络互连模式</code>的。</p><p>​    独立模式：相当于单机模式</p><p>​    网络互联模式：将计算机连在一起，形成一个计算机网络，信息共享、传递消息等</p><p>计算机网络按规模划分（定义比较宽泛）</p><p>​    WAN（Wide Area Network，广域网）：覆盖多个远距离区域的远程网络</p><p>​    MAN（Metropolitan Area Network，城域网）：连接一个城市的网络</p><p>​    LAN（Local Area Network，局域网）：一幢楼、一个学校等</p><p>计算机网络发展的7个阶段</p><ol><li><p>批处理（Batch Processing）：20世纪50年代，事先将用户程序及数据装入卡带或磁带，并由计算机按照一定顺序读取，使用户所执行的这些程序和数据能够-并批量得到处理的方式（脱机、多道、成批处理）</p></li><li><p>分时系统（Time Sharing System，TSS）：20世纪60年代，多个终端与同一计算机连接，允许多个用户同时使用一台计算机。系统采用时间片轮转的办法在客观效果上用户批次感觉不到对方也在使用这台计算机，<code>好像</code>只有自己独占这台计算机一样（独占性、星型、交互性、多路性、及时性）</p><blockquote><p>这里的<code>终端</code>由输入输出设备（显示器、键鼠等）组成</p></blockquote></li><li><p>计算机之间的通信：20世纪70年代，计算机与计算机之间通信，传输数据</p></li><li><p>计算机网络的产生：20实际80年代，能够连接多种计算机（异构）的网络产生，窗口系统发明并与网络结合  -&gt;  网上冲浪</p><blockquote><p>窗口系统的发明使用户可以同时执行多个程序，还可以在这些程序之间自由的切换作业</p></blockquote></li><li><p>互联网的普及：20实际90年代，一人一机（成本不菲），推出“瘦身”、“多供应商连接”。</p><p>瘦身：用“轻量型”个人电脑或UNIX工作站取代大型主机，降低网络架构成本</p><p>多供应商连接：将各种软硬件供应商的产品组合起来搭建网络，降低网络环境成本（异构型计算机之间的连接）</p></li><li><p>以互联网为中心：2000年，从电话网到IP网</p></li><li><p>建立连接 -&gt; 安全建立连接（完善）：2010年，随着互联网的普及，网络安全问题愈发突出，建立连接发展为安全建立连接</p></li></ol><table><thead><tr><th>年代</th><th>内容</th></tr></thead><tbody><tr><td>20世纪50年代</td><td>批处理时代</td></tr><tr><td>20世纪60年代</td><td>分时系统时代</td></tr><tr><td>20世纪70年代</td><td>计算机通信时代</td></tr><tr><td>20世纪80年代</td><td>计算机网络时代</td></tr><tr><td>20世纪90年代</td><td>互联网普及时代</td></tr><tr><td>2000年</td><td>以互联网为中心时代</td></tr><tr><td>2010年</td><td>无论何时何地一切皆TCP/IP的网络时代</td></tr></tbody></table><h3 id="2-网络通信协议"><a href="#2-网络通信协议" class="headerlink" title="2. 网络通信协议"></a>2. 网络通信协议</h3><p>TCP/IP协议是通信协议的统称。</p><p>计算机网络最初的目的是连接一个个独立的计算机，使他们组成一个更强有力的计算环境（提高生产力），现代计算的首要目的是连接人与人。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;TCP-IP-详解（一）-网络基础知识&quot;&gt;&lt;a href=&quot;#TCP-IP-详解（一）-网络基础知识&quot; class=&quot;headerlink&quot; title=&quot;TCP/IP 详解（一） 网络基础知识&quot;&gt;&lt;/a&gt;TCP/IP 详解（一） 网络基础知识&lt;/h2&gt;&lt;h3 i
+      
+    
+    </summary>
+    
+    
+      <category term="网络基础 TCP/IP详解" scheme="http://yoursite.com/tags/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80-TCP-IP%E8%AF%A6%E8%A7%A3/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>PPP协议详解</title>
+    <link href="http://yoursite.com/2018/09/28/PPP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/"/>
+    <id>http://yoursite.com/2018/09/28/PPP协议详解/</id>
+    <published>2018-09-28T08:05:33.000Z</published>
+    <updated>2018-09-28T08:13:04.654Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="点对点协议（Point-to-Point-Protocol，PPP）"><a href="#点对点协议（Point-to-Point-Protocol，PPP）" class="headerlink" title="点对点协议（Point-to-Point Protocol，PPP）"></a>点对点协议（Point-to-Point Protocol，PPP）</h2><h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>​    点对点协议（Point-to-Point Protocol，PPP），工作在数据链路层。设计目的主要是用来通过拨号或专线方式建立点对点连接发送数据，使其成为各种主机、 网桥和路由器之间简单连接的一种共通的解决方案。 </p><h3 id="组成"><a href="#组成" class="headerlink" title="组成"></a>组成</h3><ol><li>建立、配置数据链路连接的LCP（Link Control Protocol）</li><li>网络控制协议NCP（Network Control Protocol）</li><li>将IP数据报封装到串行链路的方法</li></ol><h3 id="帧格式"><a href="#帧格式" class="headerlink" title="帧格式"></a>帧格式</h3><p>​    PPP协议的数据单元称为帧，格式如图</p><p><img src="https://images2015.cnblogs.com/blog/1035967/201705/1035967-20170505193447492-1727900175.png" alt="PPP协议的数据单元称为帧"></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;点对点协议（Point-to-Point-Protocol，PPP）&quot;&gt;&lt;a href=&quot;#点对点协议（Point-to-Point-Protocol，PPP）&quot; class=&quot;headerlink&quot; title=&quot;点对点协议（Point-to-Point Pro
+      
+    
+    </summary>
+    
+    
+      <category term="网络协议" scheme="http://yoursite.com/tags/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/"/>
+    
+  </entry>
   
   <entry>
     <title>Hello World</title>
