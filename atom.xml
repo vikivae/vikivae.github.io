@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-10-09T14:13:12.681Z</updated>
+  <updated>2018-10-10T01:15:00.330Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>HMAC算法</title>
+    <link href="http://yoursite.com/2018/10/09/HMAC%E7%AE%97%E6%B3%95/"/>
+    <id>http://yoursite.com/2018/10/09/HMAC算法/</id>
+    <published>2018-10-09T13:25:29.000Z</published>
+    <updated>2018-10-10T01:15:00.330Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="HMAC-消息摘要算法"><a href="#HMAC-消息摘要算法" class="headerlink" title="HMAC - 消息摘要算法"></a>HMAC - 消息摘要算法</h2><h3 id="MAC"><a href="#MAC" class="headerlink" title="MAC"></a>MAC</h3><p>在密码学中，（消息认证码）Message Authentication Code 是用来认证消息的比较短的信息。<br>换言之，<strong>MAC用来保证消息的数据完整性和消息的数据源认证</strong> </p><p>MAC由消息本身和一个密钥经过一系列计算产生，用于生成MAC的算法，称为MAC算法。</p><p>MAC算法应能满足如下几个条件:</p><ol><li><p>在仅有消息本身没有密钥的情况下，无法得到该消息的 MAC</p></li><li><p>同一个消息在使用不同密钥的情况下，生成的 MAC 应当无关联</p></li><li><p>在已有一系列消息以及其 MAC 时，给定一个新的消息，无法得到该消息的 MAC</p></li></ol><p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/MAC.svg/661px-MAC.svg.png" alt="维基百科"></p><p>上图为维基百科上 MAC 算法使用示例。</p><h3 id="HMAC"><a href="#HMAC" class="headerlink" title="HMAC"></a>HMAC</h3><p>HMAC（Hash-based Message Authentication Code，哈希消息认证码）利用<code>哈希算法</code>，<strong>以一个密钥和一个消息为输入，生成一个消息摘要作为输出</strong> </p><p>HMAC 是 IP 安全里必须实现的 MAC 方案，并且其他 Internet 协议中（如SSL）也使用了 HMAC。</p><p><strong>HMAC的设计目标</strong> </p><ol><li>可以直接使用现成的 Hash 函数</li><li>很容易用更好地 Hash 函数替代原来嵌入的 Hash 函数</li><li>能够保持 Hash 函数的原有性能，不能过分降低其性能</li><li>对密钥的使用和处理应较简单</li><li>如果已知嵌入的 Hash 函数的强度，完全可以知道认证机制抗密码分析的强度</li></ol><p>正是 HMAC 的这些设计目标保证了HMAC的灵活性、可用性和扩展性，从而得到了广泛的支持。</p><p>定义 HMAC 需要一个加密用散列函数（表示为 H，可以是 MD5 或者 SHA-1）和一个密钥 K。我们用 B 来表示数据块的字节数。（以上所提到的散列函数的分割数据块字长 B=64），用 L 来表示散列函数的输出数据字节数（MD5  中 L=16, SHA-1 中 L=20）。鉴别密钥的长度可以是小于等于数据块字长的任何正整数值。应用程序中使用的密钥长度若是比 B 大，则首先用使用散列函数 H 作用于它，然后用 H 输出的L长度字符串作为在 HMAC 中实际使用的密钥。</p><p>一般情况下，推荐的最小密钥 K 长度是 L 个字节。</p><h4 id="算法表示"><a href="#算法表示" class="headerlink" title="算法表示"></a>算法表示</h4><p>算法公式 ：</p><p><strong>HMAC( K, M ) = H( K⊕Opad | H( K⊕Ipad | M) ) </strong>   </p><p>H 代表所采用的HASH算法(如SHA-256)</p><p>K 代表认证密钥</p><p>Ko 代表HASH算法的密文</p><p>M 代表一个消息输入</p><p>B 代表H中所处理的块大小，这个大小是处理块大小，而不是输出 hash 的大小</p><p>如，SHA-1 和 SHA-256 B = 64</p><p>SHA-384 和 SHA-512 B = 128</p><p>L 表示 hash 的大小</p><p>Opad 用 0x5c 重复 B 次</p><p>Ipad 用 0x36 重复 B 次</p><p>Apad 用 0x878FE1F3 重复 (L/4) 次</p><h4 id="HMAC运算步骤"><a href="#HMAC运算步骤" class="headerlink" title="HMAC运算步骤"></a>HMAC运算步骤</h4><p>First-Hash = H( Ko XOR Ipad || (data to auth) )</p><p>Second-Hash = H( Ko XOR Opad || First-Hash)</p><ol><li>在密钥 K 后面添加0来创建一个字长为 B 的字符串。(例如，如果 K 的字长是20字节，B=64 字节，则K后会加入44个零字节0x00)</li><li>将上一步生成的 B 字长的字符串与 ipad 做异或运算</li><li>将数据流 text 填充至第二步的结果字符串中</li><li>用 H 作用于第三步生成的数据流</li><li>将第一步生成的 B 字长字符串与 opad 做异或运算</li><li>再将第四步的结果填充进第五步的结果中</li><li>用 H 作用于第六步生成的数据流，输出最终结果</li></ol><h4 id="HMAC的应用"><a href="#HMAC的应用" class="headerlink" title="HMAC的应用"></a>HMAC的应用</h4><p>HMAC 主要应用在<code>身份验证</code>中，它的使用方法是这样的：</p><ol><li>客户端发出登录请求（假设是浏览器的GET请求）</li><li>服务器返回一个随机值，并在会话中记录这个随机值</li><li>客户端将该随机值作为密钥，用户密码进行 HMAC 运算，然后提交给服务器</li><li>服务器读取用户数据库中的用户密码和步骤2中发送的随机值做与客户端一样的 HMAC 运算，然后与用户发送的结果比较，如果结果一致则验证用户合法</li></ol><p>在这个过程中，可能遭到安全攻击的是服务器发送的随机值和用户发送的 HMAC 结果，而对于截获了这两个值的黑客而言这两个值是没有意义的，绝无获取用户密码的可能性。</p><p>随机值的引入使 HMAC 只在当前会话中有效，大大增强了安全性和实用性。</p><h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><p><a href="https://en.wikipedia.org/wiki/Message_authentication_code" target="_blank" rel="noopener">Message authentication code</a> </p><p><a href="http://blog.51cto.com/xwandrew/2050973" target="_blank" rel="noopener">MAC与HMAC介绍</a> </p><p><a href="https://www.cnblogs.com/block2016/p/5635111.html" target="_blank" rel="noopener">HMAC</a> </p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;HMAC-消息摘要算法&quot;&gt;&lt;a href=&quot;#HMAC-消息摘要算法&quot; class=&quot;headerlink&quot; title=&quot;HMAC - 消息摘要算法&quot;&gt;&lt;/a&gt;HMAC - 消息摘要算法&lt;/h2&gt;&lt;h3 id=&quot;MAC&quot;&gt;&lt;a href=&quot;#MAC&quot; class
+      
+    
+    </summary>
+    
+    
+      <category term="密码学" scheme="http://yoursite.com/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/"/>
+    
+  </entry>
   
   <entry>
     <title>DH(Diffie–Hellman)算法</title>
@@ -59,6 +82,29 @@
     
     
       <category term="密码学" scheme="http://yoursite.com/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>TCP/IP 详解（一） 网络基础知识</title>
+    <link href="http://yoursite.com/2018/09/30/TCP-IP-%E8%AF%A6%E8%A7%A3%EF%BC%88%E4%B8%80%EF%BC%89-%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
+    <id>http://yoursite.com/2018/09/30/TCP-IP-详解（一）-网络基础知识/</id>
+    <published>2018-09-30T01:25:20.000Z</published>
+    <updated>2018-10-10T01:15:21.499Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="TCP-IP-详解（一）-网络基础知识"><a href="#TCP-IP-详解（一）-网络基础知识" class="headerlink" title="TCP/IP 详解（一） 网络基础知识"></a>TCP/IP 详解（一） 网络基础知识</h2><h3 id="1-计算机网络发展"><a href="#1-计算机网络发展" class="headerlink" title="1. 计算机网络发展"></a>1. 计算机网络发展</h3><p>计算机发展是从<code>独立模式</code>到<code>网络互连模式</code>的。</p><p>​    独立模式：相当于单机模式</p><p>​    网络互联模式：将计算机连在一起，形成一个计算机网络，信息共享、传递消息等</p><p>计算机网络按规模划分（定义比较宽泛）</p><p>​    WAN（Wide Area Network，广域网）：覆盖多个远距离区域的远程网络</p><p>​    MAN（Metropolitan Area Network，城域网）：连接一个城市的网络</p><p>​    LAN（Local Area Network，局域网）：一幢楼、一个学校等</p><p>计算机网络发展的7个阶段</p><ol><li><p>批处理（Batch Processing）：20世纪50年代，事先将用户程序及数据装入卡带或磁带，并由计算机按照一定顺序读取，使用户所执行的这些程序和数据能够-并批量得到处理的方式（脱机、多道、成批处理）</p></li><li><p>分时系统（Time Sharing System，TSS）：20世纪60年代，多个终端与同一计算机连接，允许多个用户同时使用一台计算机。系统采用时间片轮转的办法在客观效果上用户批次感觉不到对方也在使用这台计算机，<code>好像</code>只有自己独占这台计算机一样（独占性、星型、交互性、多路性、及时性）</p><blockquote><p>这里的<code>终端</code>由输入输出设备（显示器、键鼠等）组成</p></blockquote></li><li><p>计算机之间的通信：20世纪70年代，计算机与计算机之间通信，传输数据</p></li><li><p>计算机网络的产生：20实际80年代，能够连接多种计算机（异构）的网络产生，窗口系统发明并与网络结合  -&gt;  网上冲浪</p><blockquote><p>窗口系统的发明使用户可以同时执行多个程序，还可以在这些程序之间自由的切换作业</p></blockquote></li><li><p>互联网的普及：20实际90年代，一人一机（成本不菲），推出“瘦身”、“多供应商连接”。</p><p>瘦身：用“轻量型”个人电脑或UNIX工作站取代大型主机，降低网络架构成本</p><p>多供应商连接：将各种软硬件供应商的产品组合起来搭建网络，降低网络环境成本（异构型计算机之间的连接）</p></li><li><p>以互联网为中心：2000年，从电话网到IP网</p></li><li><p>建立连接 -&gt; 安全建立连接（完善）：2010年，随着互联网的普及，网络安全问题愈发突出，建立连接发展为安全建立连接</p></li></ol><table><thead><tr><th>年代</th><th>内容</th></tr></thead><tbody><tr><td>20世纪50年代</td><td>批处理时代</td></tr><tr><td>20世纪60年代</td><td>分时系统时代</td></tr><tr><td>20世纪70年代</td><td>计算机通信时代</td></tr><tr><td>20世纪80年代</td><td>计算机网络时代</td></tr><tr><td>20世纪90年代</td><td>互联网普及时代</td></tr><tr><td>2000年</td><td>以互联网为中心时代</td></tr><tr><td>2010年</td><td>无论何时何地一切皆TCP/IP的网络时代</td></tr></tbody></table><h3 id="2-网络通信协议"><a href="#2-网络通信协议" class="headerlink" title="2. 网络通信协议"></a>2. 网络通信协议</h3><p>TCP/IP协议是通信协议的统称。</p><p>计算机网络最初的目的是连接一个个独立的计算机，使他们组成一个更强有力的计算环境（提高生产力），现代计算的首要目的是连接人与人。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;TCP-IP-详解（一）-网络基础知识&quot;&gt;&lt;a href=&quot;#TCP-IP-详解（一）-网络基础知识&quot; class=&quot;headerlink&quot; title=&quot;TCP/IP 详解（一） 网络基础知识&quot;&gt;&lt;/a&gt;TCP/IP 详解（一） 网络基础知识&lt;/h2&gt;&lt;h3 i
+      
+    
+    </summary>
+    
+    
+      <category term="TCP/IP详解" scheme="http://yoursite.com/tags/TCP-IP%E8%AF%A6%E8%A7%A3/"/>
     
   </entry>
   

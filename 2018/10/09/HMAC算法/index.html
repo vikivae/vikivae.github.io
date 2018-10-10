@@ -1,0 +1,227 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>HMAC算法 | 鱼 | 一条咸鱼</title>
+
+  
+  <meta name="author" content="HaooJie">
+  
+
+  
+  <meta name="description" content="HMAC - 消息摘要算法MAC在密码学中，（消息认证码）Message Authentication Code 是用来认证消息的比较短的信息。换言之，MAC用来保证消息的数据完整性和消息的数据源认证 
+MAC由消息本身和一个密钥经过一系列计算产生，用于生成MAC的算法，称为MAC算法。
+MAC算法">
+  
+
+  
+  
+  <meta name="keywords" content="密码学">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="HMAC算法"/>
+
+  <meta property="og:site_name" content="鱼"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="鱼" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">鱼</a>
+    </h1>
+    <p class="site-description">一条咸鱼</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>HMAC算法</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2018/10/09/HMAC算法/" rel="bookmark">
+        <time class="entry-date published" datetime="2018-10-09T13:25:29.000Z">
+          2018-10-09
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h2 id="HMAC-消息摘要算法"><a href="#HMAC-消息摘要算法" class="headerlink" title="HMAC - 消息摘要算法"></a>HMAC - 消息摘要算法</h2><h3 id="MAC"><a href="#MAC" class="headerlink" title="MAC"></a>MAC</h3><p>在密码学中，（消息认证码）Message Authentication Code 是用来认证消息的比较短的信息。<br>换言之，<strong>MAC用来保证消息的数据完整性和消息的数据源认证</strong> </p>
+<p>MAC由消息本身和一个密钥经过一系列计算产生，用于生成MAC的算法，称为MAC算法。</p>
+<p>MAC算法应能满足如下几个条件:</p>
+<ol>
+<li><p>在仅有消息本身没有密钥的情况下，无法得到该消息的 MAC</p>
+</li>
+<li><p>同一个消息在使用不同密钥的情况下，生成的 MAC 应当无关联</p>
+</li>
+<li><p>在已有一系列消息以及其 MAC 时，给定一个新的消息，无法得到该消息的 MAC</p>
+</li>
+</ol>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/MAC.svg/661px-MAC.svg.png" alt="维基百科"></p>
+<p>上图为维基百科上 MAC 算法使用示例。</p>
+<h3 id="HMAC"><a href="#HMAC" class="headerlink" title="HMAC"></a>HMAC</h3><p>HMAC（Hash-based Message Authentication Code，哈希消息认证码）利用<code>哈希算法</code>，<strong>以一个密钥和一个消息为输入，生成一个消息摘要作为输出</strong> </p>
+<p>HMAC 是 IP 安全里必须实现的 MAC 方案，并且其他 Internet 协议中（如SSL）也使用了 HMAC。</p>
+<p><strong>HMAC的设计目标</strong> </p>
+<ol>
+<li>可以直接使用现成的 Hash 函数</li>
+<li>很容易用更好地 Hash 函数替代原来嵌入的 Hash 函数</li>
+<li>能够保持 Hash 函数的原有性能，不能过分降低其性能</li>
+<li>对密钥的使用和处理应较简单</li>
+<li>如果已知嵌入的 Hash 函数的强度，完全可以知道认证机制抗密码分析的强度</li>
+</ol>
+<p>正是 HMAC 的这些设计目标保证了HMAC的灵活性、可用性和扩展性，从而得到了广泛的支持。</p>
+<p>定义 HMAC 需要一个加密用散列函数（表示为 H，可以是 MD5 或者 SHA-1）和一个密钥 K。我们用 B 来表示数据块的字节数。（以上所提到的散列函数的分割数据块字长 B=64），用 L 来表示散列函数的输出数据字节数（MD5  中 L=16, SHA-1 中 L=20）。鉴别密钥的长度可以是小于等于数据块字长的任何正整数值。应用程序中使用的密钥长度若是比 B 大，则首先用使用散列函数 H 作用于它，然后用 H 输出的L长度字符串作为在 HMAC 中实际使用的密钥。</p>
+<p>一般情况下，推荐的最小密钥 K 长度是 L 个字节。</p>
+<h4 id="算法表示"><a href="#算法表示" class="headerlink" title="算法表示"></a>算法表示</h4><p>算法公式 ：</p>
+<p><strong>HMAC( K, M ) = H( K⊕Opad | H( K⊕Ipad | M) ) </strong>   </p>
+<p>H 代表所采用的HASH算法(如SHA-256)</p>
+<p>K 代表认证密钥</p>
+<p>Ko 代表HASH算法的密文</p>
+<p>M 代表一个消息输入</p>
+<p>B 代表H中所处理的块大小，这个大小是处理块大小，而不是输出 hash 的大小</p>
+<p>如，SHA-1 和 SHA-256 B = 64</p>
+<p>SHA-384 和 SHA-512 B = 128</p>
+<p>L 表示 hash 的大小</p>
+<p>Opad 用 0x5c 重复 B 次</p>
+<p>Ipad 用 0x36 重复 B 次</p>
+<p>Apad 用 0x878FE1F3 重复 (L/4) 次</p>
+<h4 id="HMAC运算步骤"><a href="#HMAC运算步骤" class="headerlink" title="HMAC运算步骤"></a>HMAC运算步骤</h4><p>First-Hash = H( Ko XOR Ipad || (data to auth) )</p>
+<p>Second-Hash = H( Ko XOR Opad || First-Hash)</p>
+<ol>
+<li>在密钥 K 后面添加0来创建一个字长为 B 的字符串。(例如，如果 K 的字长是20字节，B=64 字节，则K后会加入44个零字节0x00)</li>
+<li>将上一步生成的 B 字长的字符串与 ipad 做异或运算</li>
+<li>将数据流 text 填充至第二步的结果字符串中</li>
+<li>用 H 作用于第三步生成的数据流</li>
+<li>将第一步生成的 B 字长字符串与 opad 做异或运算</li>
+<li>再将第四步的结果填充进第五步的结果中</li>
+<li>用 H 作用于第六步生成的数据流，输出最终结果</li>
+</ol>
+<h4 id="HMAC的应用"><a href="#HMAC的应用" class="headerlink" title="HMAC的应用"></a>HMAC的应用</h4><p>HMAC 主要应用在<code>身份验证</code>中，它的使用方法是这样的：</p>
+<ol>
+<li>客户端发出登录请求（假设是浏览器的GET请求）</li>
+<li>服务器返回一个随机值，并在会话中记录这个随机值</li>
+<li>客户端将该随机值作为密钥，用户密码进行 HMAC 运算，然后提交给服务器</li>
+<li>服务器读取用户数据库中的用户密码和步骤2中发送的随机值做与客户端一样的 HMAC 运算，然后与用户发送的结果比较，如果结果一致则验证用户合法</li>
+</ol>
+<p>在这个过程中，可能遭到安全攻击的是服务器发送的随机值和用户发送的 HMAC 结果，而对于截获了这两个值的黑客而言这两个值是没有意义的，绝无获取用户密码的可能性。</p>
+<p>随机值的引入使 HMAC 只在当前会话中有效，大大增强了安全性和实用性。</p>
+<h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><p><a href="https://en.wikipedia.org/wiki/Message_authentication_code" target="_blank" rel="noopener">Message authentication code</a> </p>
+<p><a href="http://blog.51cto.com/xwandrew/2050973" target="_blank" rel="noopener">MAC与HMAC介绍</a> </p>
+<p><a href="https://www.cnblogs.com/block2016/p/5635111.html" target="_blank" rel="noopener">HMAC</a> </p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/密码学/">密码学</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+	<section id="comment" class="comment">
+		<div id="gitment"></div>
+	</section>
+	<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+	<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+	<script>
+		var gitment = new Gitment({
+			owner: 'HaooJie',
+			repo: 'haoojie.github.io',
+			oauth: {
+				client_id: 'bbd60327fb6dbb3e7854',
+				client_secret: '99a78b76aad9045557caa3948812cdcf87b12c26',
+			},
+		})
+		gitment.render('gitment')
+	</script>
+
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2018 HaooJie
+    
+  </p>
+</footer>
+    
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-126549317-1', 'auto');
+    ga('send', 'pageview');
+
+</script>
+
+  </div>
+</div>
+</body>
+</html>
