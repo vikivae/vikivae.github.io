@@ -118,7 +118,7 @@ Data Science and Big Data Analytics: Discovering, Analyzing, Visualizing and Pre
 <p>在二维空间中欧氏距离计算公式为：</p>
 <p><img src="http://img.my.csdn.net/uploads/201211/20/1353399552_4107.png" alt="img"></p>
 <p>示例：</p>
-<p><img src="C:\Users\whj\AppData\Roaming\Typora\typora-user-images\1539160246010.png" alt="1539160246010"></p>
+<p><img src="/2018/10/10/聚类/1539160246010.png" alt="1539160246010"></p>
 <p>上图中各点的坐标为：</p>
 <p>p1 = (0, 2)<br>p2 = (2, 0)<br>p3 = (3, 1)<br>p4 = (5, 1)</p>
 <p>各点间欧氏距离为：</p>
@@ -169,35 +169,29 @@ Data Science and Big Data Analytics: Discovering, Analyzing, Visualizing and Pre
 <p>在二维空间中曼哈顿距离计算公式为：</p>
 <p><img src="http://img.my.csdn.net/uploads/201211/20/1353399908_7845.png" alt="img"></p>
 <p>示例：</p>
-<p><img src="C:\Users\whj\AppData\Roaming\Typora\typora-user-images\1539161037816.png" alt="1539161037816"><img src="C:\Users\whj\AppData\Roaming\Typora\typora-user-images\1539161207965.png" alt="1539161207965"></p>
+<p><img src="/2018/10/10/聚类/1539161037816.png" alt="1539161037816"><img src="/2018/10/10/聚类/1539161207965.png" alt="1539161207965"></p>
 <p>a1 = (2, 8)<br>a2 = (6, 3)</p>
 <p>dist = |2-6| + |8-3| = 4+5 = 9</p>
 <h4 id="距离度量函数"><a href="#距离度量函数" class="headerlink" title="距离度量函数"></a>距离度量函数</h4><p>一个函数 d 是距离度量函数需要具备以下条件</p>
 <ol>
-<li><p>非负，d(a, b) &gt;= 0</p>
-</li>
-<li><p>恒等，if (a==b) d(a, b) = 0</p>
-</li>
-<li><p>对称，d(a, b)  = d(b, a)</p>
-</li>
-<li><p>三角不等式，d(a, b) &lt;= d(a, c) + d(c, b)</p>
-</li>
+<li>非负，d(a, b) &gt;= 0</li>
+<li>恒等，if (a==b) d(a, b) = 0</li>
+<li>对称，d(a, b)  = d(b, a)</li>
+<li>三角不等式，d(a, b) &lt;= d(a, c) + d(c, b)</li>
 </ol>
-<p><img src="C:\Users\whj\AppData\Roaming\Typora\typora-user-images\1539161600701.png" alt="1539161600701"></p>
+<p><img src="/2018/10/10/聚类/1539161600701.png" alt="1539161600701"></p>
 <h3 id="1-聚类概述"><a href="#1-聚类概述" class="headerlink" title="1. 聚类概述"></a>1. 聚类概述</h3><p>聚类：使用无监督学习对类似对象进行分组</p>
 <p>监督学习：使用带有标签的物体<br>无监督学习：使用不带标签的物体</p>
 <p>聚类查找数据中的隐藏结构，基于属性的相似性，<code>通常用于探索性分析且没有预测</code> </p>
 <h4 id="什么是聚类"><a href="#什么是聚类" class="headerlink" title="什么是聚类"></a>什么是聚类</h4><p>针对<code>一组</code>数据对象做处理，使得<code>组内的对象彼此相似（或相关）</code>并且<code>与其他组中的对象不同（或不相关）</code>，即组内距离最小化、组间距离最大化</p>
-<p><img src="C:\Users\whj\AppData\Roaming\Typora\typora-user-images\1539162325797.png" alt="1539162325797"></p>
+<p><img src="/2018/10/10/聚类/1539162325797.png" alt="1539162325797"></p>
 <p>对对象（受访者，产品，公司，变量等）进行分组，以便每个对象与类中的其他对象类似，并且与所有其他类中的对象不同。</p>
 <p>示例：</p>
-<p><img src="C:\Users\whj\AppData\Roaming\Typora\typora-user-images\1539162699263.png" alt="1539162699263"></p>
+<p><img src="/2018/10/10/聚类/1539162699263.png" alt="1539162699263"></p>
 <p>我们可以用聚类干什么</p>
 <ol>
-<li><p>确定集群的含义</p>
-</li>
-<li><p>解释如何使用集群</p>
-</li>
+<li>确定集群的含义</li>
+<li>解释如何使用集群</li>
 </ol>
 <p><strong>聚类设计注意事项：</strong> </p>
 <ol>
@@ -228,24 +222,24 @@ Data Science and Big Data Analytics: Discovering, Analyzing, Visualizing and Pre
 </ol>
 <p>示例：</p>
 <p>埃里克和他的朋友们聚会， 他们决定分享他们收藏的葡萄酒。问如何分类这些葡萄酒？</p>
-<p><img src="C:\Users\whj\AppData\Roaming\Typora\typora-user-images\1539163669601.png" alt="1539163669601"></p>
+<p><img src="/2018/10/10/聚类/1539163669601.png" alt="1539163669601"></p>
 <ol>
 <li><p>列出葡萄酒的属性，在其中选择聚类特征变量。 在这种情况下，我们选择评级和价格</p>
-<p><img src="C:\Users\whj\AppData\Roaming\Typora\typora-user-images\1539163864982.png" alt="葡萄酒属性"></p>
+<p><img src="/2018/10/10/聚类/1539163864982.png" alt="葡萄酒属性"></p>
 </li>
 <li><p>将表转换为散点图</p>
-<p><img src="C:\Users\whj\AppData\Roaming\Typora\typora-user-images\1539166607835.png" alt="1539166607835"></p>
+<p><img src="/2018/10/10/聚类/1539166607835.png" alt="1539166607835"></p>
 <p>我们可以说有两个集群：低评级和低价格、高评级和高价格</p>
 </li>
 <li><p>决定使用这两个集群</p>
 </li>
 <li><p>进行聚类</p>
-<p><img src="C:\Users\whj\AppData\Roaming\Typora\typora-user-images\1539166779783.png" alt="1539166779783"></p>
+<p><img src="/2018/10/10/聚类/1539166779783.png" alt="1539166779783"></p>
 </li>
 </ol>
 <p>但是有一个异常值</p>
 <h3 id="2-聚类的两种类型"><a href="#2-聚类的两种类型" class="headerlink" title="2. 聚类的两种类型"></a>2. 聚类的两种类型</h3><p>划分聚类（Partitional algorithms）：构造各种分区，然后按一些标准评估它们<br>层次聚类（Hierarchical algorithms）：使用某个标准（通常为距离）创建对象集的层次分级</p>
-<p><img src="C:\Users\whj\AppData\Roaming\Typora\typora-user-images\1539168431282.png" alt="1539168431282"></p>
+<p><img src="/2018/10/10/聚类/1539168431282.png" alt="1539168431282"></p>
 <h4 id="K-means（基于划分的聚类-Partitional-algorithms）"><a href="#K-means（基于划分的聚类-Partitional-algorithms）" class="headerlink" title="K-means（基于划分的聚类 Partitional algorithms）"></a>K-means（基于划分的聚类 Partitional algorithms）</h4><p>给定一组具有 n 个可测量属性的对象的数据集和集群的划分数量 k，该算法根据每个对象到这 k 个组的中心的邻近长度区分这 k 个组</p>
 <p>采用迭代的重定位技术，尝试通过对象在划分间移动来改进划分。所谓重定位技术，就是当有新的对象加入簇或者已有对象离开簇的时候，重新计算簇的平均值作为中心（簇中对象各维向量的平均值），然后对对象进行重新分配。这个过程不断重复，直到各簇中对象不再变化为止。</p>
 <p>使用示例：</p>
@@ -265,13 +259,13 @@ Data Science and Big Data Analytics: Discovering, Analyzing, Visualizing and Pre
 <p>示例1：</p>
 <ol>
 <li><p>设置 k = 3 和初始聚类中心</p>
-<p><img src="C:\Users\whj\AppData\Roaming\Typora\typora-user-images\1539170669025.png" alt="1539170669025"></p>
+<p><img src="/2018/10/10/聚类/1539170669025.png" alt="1539170669025"></p>
 </li>
 <li><p>点被分配给最近的类（根据点到聚类中心的距离分配）</p>
-<p><img src="C:\Users\whj\AppData\Roaming\Typora\typora-user-images\1539170717637.png" alt="1539170717637"></p>
+<p><img src="/2018/10/10/聚类/1539170717637.png" alt="1539170717637"></p>
 </li>
 <li><p>计算新集群的聚类中心</p>
-<p><img src="C:\Users\whj\AppData\Roaming\Typora\typora-user-images\1539170753121.png" alt="1539170753121"></p>
+<p><img src="/2018/10/10/聚类/1539170753121.png" alt="1539170753121"></p>
 </li>
 <li><p>重复第2、3步直到收敛<br>当聚类中心不改变或聚类中心来回振荡时收敛（当一个或多个点与聚类中心距离相等时，可能会发生这种情况）</p>
 </li>
@@ -298,7 +292,7 @@ Data Science and Big Data Analytics: Discovering, Analyzing, Visualizing and Pre
 </ul>
 </li>
 </ol>
-<p><img src="C:\Users\whj\AppData\Roaming\Typora\typora-user-images\1539171166690.png" alt="1539171166690"></p>
+<p><img src="/2018/10/10/聚类/1539171166690.png" alt="1539171166690"></p>
 <p>示例2：</p>
 <blockquote>
 <p>算法：K-means </p>
@@ -306,59 +300,59 @@ Data Science and Big Data Analytics: Discovering, Analyzing, Visualizing and Pre
 </blockquote>
 <ol>
 <li><p>确定集群的数量并随机设置相同数量的 k 个节点（聚类中心）</p>
-<p><img src="C:\Users\whj\AppData\Roaming\Typora\typora-user-images\1539171340715.png" alt="1539171340715"></p>
+<p><img src="/2018/10/10/聚类/1539171340715.png" alt="1539171340715"></p>
 </li>
 <li><p>根据它们到 k 个节点的距离对所有对象进行聚类。 然后重新设置第1步产生的 k 个节点（聚类中心）</p>
-<p><img src="C:\Users\whj\AppData\Roaming\Typora\typora-user-images\1539171457637.png" alt="1539171457637"></p>
+<p><img src="/2018/10/10/聚类/1539171457637.png" alt="1539171457637"></p>
 </li>
 <li><p>根据每个对象到k个节点的距离重新聚类</p>
-<p><img src="C:\Users\whj\AppData\Roaming\Typora\typora-user-images\1539171505050.png" alt="1539171505050"></p>
+<p><img src="/2018/10/10/聚类/1539171505050.png" alt="1539171505050"></p>
 </li>
 <li><p>重新设置 k 个节点（聚类中心），即将k个节点移动到其集群的中心</p>
-<p><img src="C:\Users\whj\AppData\Roaming\Typora\typora-user-images\1539171797117.png" alt="1539171797117"></p>
+<p><img src="/2018/10/10/聚类/1539171797117.png" alt="1539171797117"></p>
 </li>
 <li><p>重复步骤3和4，直到 k 个节点不改变位置</p>
-<p><img src="C:\Users\whj\AppData\Roaming\Typora\typora-user-images\1539171843507.png" alt="1539171843507"></p>
+<p><img src="/2018/10/10/聚类/1539171843507.png" alt="1539171843507"></p>
 </li>
 </ol>
 <p>示例3：</p>
 <p>现有学生成绩如下图：</p>
-<p><img src="C:\Users\whj\AppData\Roaming\Typora\typora-user-images\1539171929457.png" alt="1539171929457"></p>
+<p><img src="/2018/10/10/聚类/1539171929457.png" alt="1539171929457"></p>
 <p>绘制散点图如下：</p>
-<p><img src="C:\Users\whj\AppData\Roaming\Typora\typora-user-images\1539172369783.png" alt="1539172369783"> </p>
+<p><img src="/2018/10/10/聚类/1539172369783.png" alt="1539172369783"> </p>
 <p>初始化三个中心：</p>
-<p><img src="C:\Users\whj\AppData\Roaming\Typora\typora-user-images\1539172399392.png" alt="初始化中心"></p>
+<p><img src="/2018/10/10/聚类/1539172399392.png" alt="初始化中心"></p>
 <p>将每个学生分配到最近的中心：</p>
-<p><img src="C:\Users\whj\AppData\Roaming\Typora\typora-user-images\1539172658724.png" alt="对象划分"></p>
+<p><img src="/2018/10/10/聚类/1539172658724.png" alt="对象划分"></p>
 <p>重新计算第一个中心 (54, 42)、(70, 57)、(69, 61)、(68, 66)、(88, 71)、(89, 74)、(74, 72)、(83, 83) 的平均值为 (74.38, 65.75)</p>
-<p><img src="C:\Users\whj\AppData\Roaming\Typora\typora-user-images\1539172413813.png" alt="1539172413813"></p>
+<p><img src="/2018/10/10/聚类/1539172413813.png" alt="1539172413813"></p>
 <p>重新计算第二个中心 (41, 43)、(45, 50) 的平均值为 (43.00, 46.50)</p>
-<p><img src="C:\Users\whj\AppData\Roaming\Typora\typora-user-images\1539172807489.png" alt="1539172807489"></p>
+<p><img src="/2018/10/10/聚类/1539172807489.png" alt="1539172807489"></p>
 <p>重新计算第三个中心 (56, 55)、(58, 58)、(63, 64)、(48, 65)、(72, 79)、(60, 83)、(86, 91)、(92, 97)、 (94, 100) 的平均值为 (69.89, 76.89)</p>
-<p><img src="C:\Users\whj\AppData\Roaming\Typora\typora-user-images\1539172819316.png" alt="1539172819316"></p>
+<p><img src="/2018/10/10/聚类/1539172819316.png" alt="1539172819316"></p>
 <p>重新分配每个学生最近的中心</p>
-<p><img src="C:\Users\whj\AppData\Roaming\Typora\typora-user-images\1539173397754.png" alt="1539173397754"></p>
+<p><img src="/2018/10/10/聚类/1539173397754.png" alt="1539173397754"></p>
 <p>重新计算第一个中心 (70, 57)、(58, 58)、(69, 61)、(63, 64)、(68, 66)、(88, 71)、(89, 74)、(74, 72) 的平均值为 (72.38, 65.38)</p>
-<p><img src="C:\Users\whj\AppData\Roaming\Typora\typora-user-images\1539173529256.png" alt="1539173529256"></p>
+<p><img src="/2018/10/10/聚类/1539173529256.png" alt="1539173529256"></p>
 <p>重新计算第二个中心 (54, 42)、 (41, 43)、(45, 50) 、(56, 55)、(48, 65) 的平均值为 (48.80, 51.00) </p>
-<p><img src="C:\Users\whj\AppData\Roaming\Typora\typora-user-images\1539173769853.png" alt="1539173769853"></p>
+<p><img src="/2018/10/10/聚类/1539173769853.png" alt="1539173769853"></p>
 <p>重新计算第三个中心 (72, 79)、(60, 83)、(83, 83)、(86, 91)、(92, 97)、 (94, 100) 的平均值为 (81.17, 88.83)</p>
-<p><img src="C:\Users\whj\AppData\Roaming\Typora\typora-user-images\1539173839158.png" alt="1539173839158"></p>
+<p><img src="/2018/10/10/聚类/1539173839158.png" alt="1539173839158"></p>
 <p>重新分配每个学生最近的中心，重新计算第一个中心 (70, 57)、(69, 61)、(63, 64)、(68, 66)、(88, 71)、(74, 72)、(60, 83) 的平均值为 (70.29, 67.71)</p>
-<p><img src="C:\Users\whj\AppData\Roaming\Typora\typora-user-images\1539174147613.png" alt="1539174147613"></p>
+<p><img src="/2018/10/10/聚类/1539174147613.png" alt="1539174147613"></p>
 <p>重新计算第二个中心 (54, 42)、 (41, 43)、(45, 50) 、(56, 55)、(58, 58)、(48, 65) 的平均值为 (50.33, 52.17) </p>
-<p><img src="C:\Users\whj\AppData\Roaming\Typora\typora-user-images\1539174232313.png" alt="1539174232313"></p>
+<p><img src="/2018/10/10/聚类/1539174232313.png" alt="1539174232313"></p>
 <p>重新计算第三个中心  (89, 74)、(72, 79)、(83, 83)、(86, 91)、(92, 97)、 (94, 100) 的平均值为 (86.00, 87.33)</p>
-<p><img src="C:\Users\whj\AppData\Roaming\Typora\typora-user-images\1539174304230.png" alt="1539174304230"></p>
+<p><img src="/2018/10/10/聚类/1539174304230.png" alt="1539174304230"></p>
 <p>重新分配每个学生最近的中心，重新计算第一个中心为 (68.00, 68.86)、第二个中心为 (50.33, 52.17)、第三个中心为 (88.67, 86.00)</p>
-<p><img src="C:\Users\whj\AppData\Roaming\Typora\typora-user-images\1539174422971.png" alt="1539174422971"></p>
+<p><img src="/2018/10/10/聚类/1539174422971.png" alt="1539174422971"></p>
 <p>最终分组为：</p>
-<p><img src="C:\Users\whj\AppData\Roaming\Typora\typora-user-images\1539174481077.png" alt="1539174481077">  </p>
-<p><img src="C:\Users\whj\AppData\Roaming\Typora\typora-user-images\1539174525500.png" alt="1539174525500"></p>
+<p><img src="/2018/10/10/聚类/1539174481077.png" alt="1539174481077">  </p>
+<p><img src="/2018/10/10/聚类/1539174525500.png" alt="1539174525500"></p>
 <p>K-means 的局限性：非球形体</p>
-<p><img src="C:\Users\whj\AppData\Roaming\Typora\typora-user-images\1539174620415.png" alt="1539174620415"> </p>
+<p><img src="/2018/10/10/聚类/1539174620415.png" alt="1539174620415"> </p>
 <p>解决：</p>
-<p><img src="C:\Users\whj\AppData\Roaming\Typora\typora-user-images\1539174675989.png" alt="1539174675989"></p>
+<p><img src="/2018/10/10/聚类/1539174675989.png" alt="1539174675989"></p>
 <p><strong>优缺点分析：</strong></p>
 <p>优点：</p>
 <ol>
@@ -374,31 +368,31 @@ Data Science and Big Data Analytics: Discovering, Analyzing, Visualizing and Pre
 </ol>
 <h4 id="Hierarchical-Clustering（层次聚类）"><a href="#Hierarchical-Clustering（层次聚类）" class="headerlink" title="Hierarchical Clustering（层次聚类）"></a>Hierarchical Clustering（层次聚类）</h4><p><code>层次结构通常用于组织信息</code>，例如在门户网站中</p>
 <p>示例1：雅虎</p>
-<p><img src="C:\Users\whj\AppData\Roaming\Typora\typora-user-images\1539175606413.png" alt="1539175606413"></p>
-<p> <img src="C:\Users\whj\AppData\Roaming\Typora\typora-user-images\1539175630740.png" alt="1539175630740"></p>
+<p><img src="/2018/10/10/聚类/1539175606413.png" alt="1539175606413"></p>
+<p> <img src="/2018/10/10/聚类/1539175630740.png" alt="1539175630740"></p>
 <p>雅虎的层次结构是手动创建的，我们将专注于自动创建数据挖掘中的层次结构。</p>
 <p>用于总结相似性度量的有用工具——树形图</p>
-<p><img src="C:\Users\whj\AppData\Roaming\Typora\typora-user-images\1539175876186.png" alt="1539175876186"></p>
+<p><img src="/2018/10/10/聚类/1539175876186.png" alt="1539175876186"></p>
 <p>树形图中两个对象之间的相似性表示为它们共享的最低内部节点的高度。</p>
-<p><img src="C:\Users\whj\AppData\Roaming\Typora\typora-user-images\1539175888083.png" alt="1539175888083"></p>
+<p><img src="/2018/10/10/聚类/1539175888083.png" alt="1539175888083"></p>
 <p> 我们可以查看树形图以确定“正确”的簇数。 在这种情况下，两个高度分离的子树高度暗示了两个簇。 （很少出现这种情况）</p>
 <p>示例2：</p>
-<p><img src="C:\Users\whj\AppData\Roaming\Typora\typora-user-images\1539176509082.png" alt="1539176509082"></p>
-<p><img src="C:\Users\whj\AppData\Roaming\Typora\typora-user-images\1539176708935.png" alt="1539176708935"></p>
+<p><img src="/2018/10/10/聚类/1539176509082.png" alt="1539176509082"></p>
+<p><img src="/2018/10/10/聚类/1539176708935.png" alt="1539176708935"></p>
 <p>树形图的一个潜在用途是<code>检测异常值</code> ，单个独立的分支暗示了与所有其他分支非常不同的数据点</p>
 <p>示例3：</p>
-<p><img src="C:\Users\whj\AppData\Roaming\Typora\typora-user-images\1539176885921.png" alt="1539176885921"></p>
+<p><img src="/2018/10/10/聚类/1539176885921.png" alt="1539176885921"></p>
 <p><strong>单连接算法（Single-Linkage）</strong> </p>
 <p>我们从距离矩阵开始，该矩阵包含数据库中每对对象之间的距离。</p>
 <p>示例4：</p>
-<p><img src="C:\Users\whj\AppData\Roaming\Typora\typora-user-images\1539177224070.png" alt="1539177224070"></p>
-<p><img src="C:\Users\whj\AppData\Roaming\Typora\typora-user-images\1539177456161.png" alt="1539177456161"></p>
-<p><img src="C:\Users\whj\AppData\Roaming\Typora\typora-user-images\1539177472045.png" alt="1539177472045"></p>
+<p><img src="/2018/10/10/聚类/1539177224070.png" alt="1539177224070"></p>
+<p><img src="/2018/10/10/聚类/1539177456161.png" alt="1539177456161"></p>
+<p><img src="/2018/10/10/聚类/1539177472045.png" alt="1539177472045"></p>
 <p>自下而上（凝聚）：从其自己的集群中的每个项目开始，找到要合并到新集群中的最佳对。 重复，直到所有集群都融合在一起。</p>
-<p><img src="C:\Users\whj\AppData\Roaming\Typora\typora-user-images\1539177604082.png" alt="1539177604082"></p>
-<p><img src="C:\Users\whj\AppData\Roaming\Typora\typora-user-images\1539177658924.png" alt="1539177658924"></p>
-<p><img src="C:\Users\whj\AppData\Roaming\Typora\typora-user-images\1539177769877.png" alt="1539177769877"></p>
-<p><img src="C:\Users\whj\AppData\Roaming\Typora\typora-user-images\1539177857273.png" alt="1539177857273"></p>
+<p><img src="/2018/10/10/聚类/1539177604082.png" alt="1539177604082"></p>
+<p><img src="/2018/10/10/聚类/1539177658924.png" alt="1539177658924"></p>
+<p><img src="/2018/10/10/聚类/1539177769877.png" alt="1539177769877"></p>
+<p><img src="/2018/10/10/聚类/1539177857273.png" alt="1539177857273"></p>
 <h4 id="什么是好的聚类算法"><a href="#什么是好的聚类算法" class="headerlink" title="什么是好的聚类算法"></a>什么是好的聚类算法</h4><ul>
 <li>一个好的聚类算法将产生具有组内相似度高、组间相似度低的集群</li>
 <li>准确定义聚类算法的质量很困难，通常是依赖应用的并且是主观的</li>
@@ -415,7 +409,7 @@ Data Science and Big Data Analytics: Discovering, Analyzing, Visualizing and Pre
 <li><p>在营销中，根据客户的相似性对客户进行细分。做针对性的营销</p>
 </li>
 <li><p>给定一组文本文档，我们希望根据它们的内容相似性来组织它们，生成主题层次结构（书店中书的排列）</p>
-<p><img src="C:\Users\whj\AppData\Roaming\Typora\typora-user-images\1539179084020.png" alt="1539179084020"></p>
+<p><img src="/2018/10/10/聚类/1539179084020.png" alt="1539179084020"></p>
 </li>
 </ol>
 <h4 id="实际应用"><a href="#实际应用" class="headerlink" title="实际应用"></a>实际应用</h4><ol>
@@ -423,17 +417,17 @@ Data Science and Big Data Analytics: Discovering, Analyzing, Visualizing and Pre
 <li>概要展示：减小大数据集的大小。天气预报中的气温图、降雨图</li>
 </ol>
 <p>例1：人群（物体）的划分</p>
-<p><img src="C:\Users\whj\AppData\Roaming\Typora\typora-user-images\1539179560155.png" alt="1539179560155"></p>
+<p><img src="/2018/10/10/聚类/1539179560155.png" alt="1539179560155"></p>
 <ol>
 <li><p>辛普森一家和学校的员工</p>
-<p><img src="C:\Users\whj\AppData\Roaming\Typora\typora-user-images\1539179605410.png" alt="1539179605410"></p>
+<p><img src="/2018/10/10/聚类/1539179605410.png" alt="1539179605410"></p>
 </li>
 <li><p>男和女</p>
-<p><img src="C:\Users\whj\AppData\Roaming\Typora\typora-user-images\1539179662214.png" alt="1539179662214"></p>
+<p><img src="/2018/10/10/聚类/1539179662214.png" alt="1539179662214"></p>
 </li>
 </ol>
 <p>例2：</p>
-<p><img src="C:\Users\whj\AppData\Roaming\Typora\typora-user-images\1539179725992.png" alt="1539179725992"></p>
+<p><img src="/2018/10/10/聚类/1539179725992.png" alt="1539179725992"></p>
 <h3 id="3-如何确定集群的最佳数量"><a href="#3-如何确定集群的最佳数量" class="headerlink" title="3. 如何确定集群的最佳数量"></a>3. 如何确定集群的最佳数量</h3><ol>
 <li><p>合理的猜测</p>
 </li>
@@ -441,7 +435,7 @@ Data Science and Big Data Analytics: Discovering, Analyzing, Visualizing and Pre
 </li>
 <li><p>使用启发式方法 - 例如，内部平方和（WSS）</p>
 <p>WSS度量是每个数据点与最近聚类中心之间的距离的平方和<br>识别 k 的适当值的过程被称为找到 WSS 曲线的拐点（WSS为纵坐标，集群数量为横坐标）</p>
-<p><img src="C:\Users\whj\AppData\Roaming\Typora\typora-user-images\1539180399694.png" alt="1539180399694"></p>
+<p><img src="/2018/10/10/聚类/1539180399694.png" alt="1539180399694"></p>
 <p>曲线的拐点发生在 K = 3 的时候</p>
 </li>
 </ol>
@@ -475,23 +469,23 @@ Data Science and Big Data Analytics: Discovering, Analyzing, Visualizing and Pre
 <li>将几个属性合并为一个：例如，债务/资产比率</li>
 </ul>
 <p>例如：7个属性的散点图矩阵如下：</p>
-<p><img src="C:\Users\whj\AppData\Roaming\Typora\typora-user-images\1539181338623.png" alt="1539181338623"></p>
+<p><img src="/2018/10/10/聚类/1539181338623.png" alt="1539181338623"></p>
 </li>
 <li><p>计量单位</p>
 <p>K-means 将根据度量单位识别不同的集群</p>
 <p>示例：</p>
 <ul>
 <li><p>身高使用 cm 为单位</p>
-<p><img src="C:\Users\whj\AppData\Roaming\Typora\typora-user-images\1539181465807.png" alt="1539181465807"></p>
+<p><img src="/2018/10/10/聚类/1539181465807.png" alt="1539181465807"></p>
 </li>
 <li><p>身高使用 m 为单位</p>
-<p><img src="C:\Users\whj\AppData\Roaming\Typora\typora-user-images\1539181524405.png" alt="1539181524405"></p>
+<p><img src="/2018/10/10/聚类/1539181524405.png" alt="1539181524405"></p>
 </li>
 </ul>
 </li>
 <li><p>重新调整可以减少统治效果</p>
 <p>例如，将每个变量除以适当的标准偏差</p>
-<p><img src="C:\Users\whj\AppData\Roaming\Typora\typora-user-images\1539181892276.png" alt="1539181892276"></p>
+<p><img src="/2018/10/10/聚类/1539181892276.png" alt="1539181892276"></p>
 </li>
 <li><p>其它考虑因素</p>
 <p>K-means对初始聚类中心敏感（替换聚类中心重新运行几次）</p>
@@ -511,7 +505,7 @@ Data Science and Big Data Analytics: Discovering, Analyzing, Visualizing and Pre
 </li>
 <li>识别出集群后，以描述性方式标记集群通常很有用</li>
 </ol>
-<h3 id="6-高中生聚类分析"><a href="#6-高中生聚类分析" class="headerlink" title="6. 高中生聚类分析"></a>6. 高中生聚类分析</h3><p><img src="C:\Users\whj\AppData\Roaming\Typora\typora-user-images\1539182847475.png" alt="1539182847475"></p>
+<h3 id="6-高中生聚类分析"><a href="#6-高中生聚类分析" class="headerlink" title="6. 高中生聚类分析"></a>6. 高中生聚类分析</h3><p><img src="/2018/10/10/聚类/1539182847475.png" alt="1539182847475"></p>
 
       
     </div>
