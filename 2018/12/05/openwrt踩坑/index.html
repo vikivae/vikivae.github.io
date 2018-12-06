@@ -1,0 +1,223 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>openwrt踩坑 | 鱼 | 一条咸鱼</title>
+
+  
+  <meta name="author" content="HaooJie">
+  
+
+  
+  <meta name="description" content="OpenWrt踩坑
+默认添加iptables规则
+12vim package/network/config/firewall/files/firewall.user+		iptables -t nat -A POSTROUTING -s 192.168.1.0/24 -o tun0 -j MASQU">
+  
+
+  
+  
+  <meta name="keywords" content="openwrt">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="openwrt踩坑"/>
+
+  <meta property="og:site_name" content="鱼"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="鱼" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">鱼</a>
+    </h1>
+    <p class="site-description">一条咸鱼</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>openwrt踩坑</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2018/12/05/openwrt踩坑/" rel="bookmark">
+        <time class="entry-date published" datetime="2018-12-05T10:59:56.000Z">
+          2018-12-05
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h2 id="OpenWrt踩坑"><a href="#OpenWrt踩坑" class="headerlink" title="OpenWrt踩坑"></a>OpenWrt踩坑</h2><ol>
+<li><p>默认添加iptables规则</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vim package/network/config/firewall/files/firewall.user</span><br><span class="line">+		iptables -t nat -A POSTROUTING -s 192.168.1.0/24 -o tun0 -j MASQUERADE</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>允许包转发</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">vim package/network/config/firewall/files/firewall.config</span><br><span class="line">config defaults</span><br><span class="line">		option syn_flood	1</span><br><span class="line">		option input		ACCEPT</span><br><span class="line">		option output		ACCEPT</span><br><span class="line">-/+		option forward		ACCEPT		# 允许转发</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>开机自启</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vim package/base-files/files/etc/rc.local</span><br><span class="line">+		/etc/init.d/cron enable</span><br><span class="line">+		/etc/init.d/cron start</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>WiFi默认开启、SSID修改</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vim package/kernel/mac80211/files/lib/wifi/mac80211.sh</span><br><span class="line">-/+		set wireless.radio$&#123;devidx&#125;.disabled=0				# 0-默认开启 1-默认关闭</span><br><span class="line">-/+		set wireless.default_radio$&#123;devidx&#125;.ssid=AP-TEST	# SSID</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>刷写固件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mtd write openwrt.bin firmware</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>喂狗</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">vim build_dir/target-mips_24kc_musl/linux-ar71xx_generic/linux<span class="number">-4.9</span><span class="number">.111</span>/arch/mips/ath79/mach-ap147.c</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;linux/gpio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> AP147_GPIO_XWDT 17	<span class="comment">// watchdog gpio</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> XWDT_AUTOFEED_DURATION          (HZ / 3)	<span class="comment">// 喂狗时间</span></span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">int</span> gpio_external_wdt = <span class="number">-1</span>;</span><br><span class="line"><span class="keyword">static</span> <span class="keyword">int</span> wdt_timeout = <span class="number">-1</span>, wdt_autofeed_count = <span class="number">0</span>;</span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">watchdog_fire</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">long</span>)</span></span>;</span><br><span class="line"><span class="keyword">static</span> <span class="class"><span class="keyword">struct</span> <span class="title">timer_list</span> <span class="title">watchdog_ticktock</span> = <span class="title">TIMER_INITIALIZER</span>(<span class="title">watchdog_fire</span>, 0, 0);</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">external_wdt_toggle</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">static</span> u32 data;</span><br><span class="line">        data ++;</span><br><span class="line">        gpio_set_value(gpio_external_wdt, data &amp; <span class="number">0x01</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">watchdog_fire</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">long</span> data)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(wdt_timeout &gt; <span class="number">0</span>)</span><br><span class="line">                wdt_autofeed_count++;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>((wdt_timeout &lt; <span class="number">0</span>) || (wdt_autofeed_count &lt; wdt_timeout)) &#123;</span><br><span class="line">                external_wdt_toggle();</span><br><span class="line">                mod_timer(&amp;watchdog_ticktock, jiffies + XWDT_AUTOFEED_DURATION);</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">enable_external_wdt</span><span class="params">(<span class="keyword">int</span> gpio)</span> </span>&#123;</span><br><span class="line">        printk(<span class="string">"register watchdog init\n"</span>);</span><br><span class="line">        gpio_external_wdt = gpio;</span><br><span class="line">        wdt_timeout = <span class="number">-1</span>;</span><br><span class="line">        mod_timer(&amp;watchdog_ticktock, jiffies + XWDT_AUTOFEED_DURATION);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> __<span class="function">init <span class="title">ap147_setup</span><span class="params">(vodi)</span> </span>&#123;</span><br><span class="line">     ath79_gpio_function_enable(AR934X_GPIO_FUNC_JTAG_DISABLE);</span><br><span class="line">     ath79_gpio_output_select(AP147_GPIO_XWDT, <span class="number">0</span>);</span><br><span class="line">     enable_external_wdt(AP147_GPIO_XWDT);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看分区</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /proc/cmdline</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改分区</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">vim target/linux/ar71xx/image/legacy.mk</span><br><span class="line">-/+		ap147_mtdlayout=mtdparts=...	</span><br><span class="line">    	<span class="comment">// 改成想要的分区，如果修改了顺序，需要修改下一处的最后一个单词 RKuImage, 按修改后的顺序填写</span></span><br><span class="line">-/+		$(eval $(call SingleProfile,AthLzma,<span class="number">64</span>k,AP147_010,ap147<span class="number">-010</span>,AP147<span class="number">-010</span>,ttyS0,<span class="number">115200</span>,$$(ap147_mtdlayout),KRuImage))</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改默认LAN IP</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">vim package/base-files/files/bin/config_generate</span><br><span class="line">case "protocol" in</span><br><span class="line">	static)</span><br><span class="line">		local ipad</span><br><span class="line">		case "$1" in</span><br><span class="line">-/+			lan) ipad=$&#123;ipaddr:-"192.168.1.1"&#125; ;;	# 改这里</span><br><span class="line">			*) ipad=$&#123;ipaddr:-"192.168.$((addr_offset++)).1"&#125; ;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改LUCI界面初始化的小字 及 首页URL</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">vim feeds/luci/modules/luci-base/root/www/index.html</span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">xmlns</span>=<span class="string">"http://www.w3.org/1999/xhtml"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"Cache-Control"</span> <span class="attr">content</span>=<span class="string">"no-cache"</span> /&gt;</span></span><br><span class="line">-/+             <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"refresh"</span> <span class="attr">content</span>=<span class="string">"0; URL=/cgi-bin/luci/login"</span> /&gt;</span>	<span class="comment">&lt;!-- 你想要的首页的URL --&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">body</span> <span class="attr">style</span>=<span class="string">"background-color: white"</span>&gt;</span></span><br><span class="line">            	<span class="comment">&lt;!-- 你想要的首页的URL --&gt;</span></span><br><span class="line">            	<span class="comment">&lt;!-- 你想要的提示 --&gt;</span></span><br><span class="line">-/+             <span class="tag">&lt;<span class="name">a</span> <span class="attr">style</span>=<span class="string">"color: black; font-family: arial, helvetica, sans-serif;"</span> <span class="attr">href</span>=<span class="string">"/cgi-bin/luci/login"</span>&gt;</span>欢迎登录xxx<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>添加自己的程序 - HelloWorld（含依赖库的helloworld程序）</p>
+<ul>
+<li>创建hellloworld包</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">cd package</span><br><span class="line">mkdir helloworld</span><br><span class="line"></span><br><span class="line"><span class="comment">// 目录如下</span></span><br><span class="line">helloworld/</span><br><span class="line">├── Makefile		<span class="comment">// Helloworld.ipk 的整体 Makefile;</span></span><br><span class="line">└── src				<span class="comment">// 源程序</span></span><br><span class="line">    ├── main.c		<span class="comment">// 源文件</span></span><br><span class="line">    └── Makefile	<span class="comment">// 源 MakeFile</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>源文件</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">vim helloworld/src/main.c </span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (sodium_init() == <span class="number">-1</span>) <span class="keyword">return</span> <span class="number">-1</span>;		<span class="comment">// 依赖库，测试是否包含libsodium</span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"\n********************************\n"</span>);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"          hello world!          \n"</span>);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"********************************\n\n"</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>源Makefile</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">vim helloworld/src/Makefile </span><br><span class="line"></span><br><span class="line">OBJECTS=helloworld</span><br><span class="line">LIBS += -lsodium</span><br><span class="line"></span><br><span class="line">all:$(OBJECTS)</span><br><span class="line">	PKG_NAME=docs</span><br><span class="line"></span><br><span class="line">helloworld:main.o</span><br><span class="line"><span class="meta">	$</span>(CC) $(LDFLAGS) $(LIBS) -std=c99 $^ -o $@</span><br><span class="line"></span><br><span class="line">main.o:main.c</span><br><span class="line"><span class="meta">	$</span>(CC) $(CFLAGS) -std=c99  -c $&lt;</span><br><span class="line"></span><br><span class="line">.PHONY:clean</span><br><span class="line">clean:</span><br><span class="line">	@-rm *.o  helloworld</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>整体Makefile</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line">vim helloworld/Makefile </span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span># Copyright (C) 2014 OpenWrt.org</span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span># This is free software, licensed under the GNU General Public License v2.</span><br><span class="line"><span class="meta">#</span> See /LICENSE for more information.</span><br><span class="line"><span class="meta">#</span></span><br><span class="line"></span><br><span class="line">include $(TOPDIR)/rules.mk	# 必须</span><br><span class="line"></span><br><span class="line">PKG_NAME:=helloworld	# 包名</span><br><span class="line">PKG_VERSION:=1.0		# 版本号</span><br><span class="line">PKG_RELEASE:=1			# 构建号</span><br><span class="line"></span><br><span class="line">include $(INCLUDE_DIR)/package.mk	# 必须</span><br><span class="line"></span><br><span class="line">PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)-$(PKG_VERSION)	# 构建包的路径</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 包的简介以及 menuconfig 的位置</span><br><span class="line">define Package/$(PKG_NAME)</span><br><span class="line">	SECTION:=utils</span><br><span class="line">	CATEGORY:=Utilities</span><br><span class="line">	TITLE:=helloworld  -- a Test Program</span><br><span class="line">	DEPENDS:=+libsodium		# 依赖库</span><br><span class="line">endef</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 包的描述，可以为空</span><br><span class="line">define Package/$(PKG_NAME)/description</span><br><span class="line">	a test program, Hello World!</span><br><span class="line">endef</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 构建包之前的准备，可以为空，会自动创建</span><br><span class="line">define Build/Prepare</span><br><span class="line">	mkdir -p $(PKG_BUILD_DIR)			# 创建 构建包的路径</span><br><span class="line">	cp -r ./src/* $(PKG_BUILD_DIR)/		# 将源码copy到上述路径</span><br><span class="line">endef</span><br><span class="line"></span><br><span class="line">define Build/Configure</span><br><span class="line">endef</span><br><span class="line"></span><br><span class="line">define Build/Compile</span><br><span class="line">endef</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 安装包所要做的全部事情</span><br><span class="line">define Package/$(PKG_NAME)/install</span><br><span class="line"><span class="meta">	#</span> 设置固件中程序（helloworld）存放在 /usr/sbin/ 下</span><br><span class="line"><span class="meta">	$</span>(INSTALL_DIR) $(1)/usr/sbin</span><br><span class="line"><span class="meta">	#</span> (INSTALL_BIN) 相当于 cp 命令</span><br><span class="line"><span class="meta">	$</span>(INSTALL_BIN) $(PKG_BUILD_DIR)/$(PKG_NAME) $(1)/usr/sbin/</span><br><span class="line">endef</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span>(eval $(call BuildPackage,$(PKG_NAME)))	# 必须有</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span> define Package/$(PKG_NAME)/install </span><br><span class="line"><span class="meta">#</span> 可以使用 shell 命令，可操作性很高</span><br><span class="line"><span class="meta">#</span> 注意：每条shell语句只能一行写完，不能分行（注意 if/where/def 等也只能写一行）</span><br><span class="line"><span class="meta">#</span> </span><br><span class="line"><span class="meta">#</span> 修改文件前需要先创建该文件</span><br><span class="line"><span class="meta">#</span> 例如：往计划任务添加一行指令</span><br><span class="line"><span class="meta">#</span>	touch $(1)/etc/crontabs/root</span><br><span class="line"><span class="meta">#</span>	if [ `grep -c "/etc/init.d/network restart" $(1)/etc/crontabs/root` -eq '0' ]; then echo "* * * * * /etc/init.d/network restart &gt; /dev/null" &gt;&gt; $(1)/etc/crontabs/root; fi</span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span> 复制文件前需要先创建文件夹</span><br><span class="line"><span class="meta">#</span> 例如：创建 helloworld 的开机自启脚本（脚本内容同 linux，名称为helloworld, 路径为$(PKG_BUILD_DIR)/bin/helloworld）</span><br><span class="line"><span class="meta">#</span> 	mkdir -p $(1)/etc/init.d</span><br><span class="line"><span class="meta">#</span> 	cp $(PKG_BUILD_DIR)/bin/helloworld $(1)/etc/init.d/</span><br><span class="line"><span class="meta">#</span> 可以使用 cp -r 复制文件夹</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在 make menuconfig 中选择 helloworld 程序</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 位置根据 整体 Makefile 中 define Package/$(PKG_NAME) 的 CATEGORY 定义</span><br><span class="line">make menuconfig</span><br><span class="line">	* Utilities</span><br><span class="line">		* helloworld</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>编译内核</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 注意：内核大小有限制，一般为 1472k</span><br><span class="line"><span class="meta">#</span> 过大会报 uImage is too big，不会生成 sysupgrade.bin 文件</span><br><span class="line">make kernel_menuconfig</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>LONGSUNG U9300C 4G支持</p>
+</li>
+<li></li>
+</ol>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/openwrt/">openwrt</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+	<section id="comment" class="comment">
+		<div id="gitment"></div>
+	</section>
+	<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+	<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+	<script>
+		var gitment = new Gitment({
+			owner: 'HaooJie',
+			repo: 'haoojie.github.io',
+			oauth: {
+				client_id: 'bbd60327fb6dbb3e7854',
+				client_secret: '99a78b76aad9045557caa3948812cdcf87b12c26',
+			},
+		})
+		gitment.render('gitment')
+	</script>
+
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2018 HaooJie
+    
+  </p>
+</footer>
+    
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-126549317-1', 'auto');
+    ga('send', 'pageview');
+
+</script>
+
+  </div>
+</div>
+</body>
+</html>
