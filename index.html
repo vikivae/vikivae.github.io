@@ -135,7 +135,35 @@
 <li><p>编译内核</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 注意：内核大小有限制，一般为 1472k</span><br><span class="line"><span class="meta">#</span> 过大会报 uImage is too big，不会生成 sysupgrade.bin 文件</span><br><span class="line">make kernel_menuconfig</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>LONGSUNG U9300C 4G支持</p>
+<li><p>LONGSUNG U9300C 4G支持（ap147）</p>
+<ul>
+<li><p>内核选项</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">make kernel_menuconfig</span><br><span class="line">Device Drives</span><br><span class="line">	* Network device support</span><br><span class="line">		* PPP(point-to-point protocol) support</span><br><span class="line">			* PPP BSD-Compress compression</span><br><span class="line">			* PPP Deflate compression</span><br><span class="line">			* PPP filtering</span><br><span class="line">			* PPP MPPE compression (encryption)</span><br><span class="line">			* PPP multilink support</span><br><span class="line">			* PPP over Ethernet</span><br><span class="line">			* PPP support for async serial ports</span><br><span class="line">			* PPP support for sync tty ports</span><br><span class="line">		* SLIP (serial line) support</span><br><span class="line">		* CSLIP compressed headers</span><br><span class="line">	* USB Support</span><br><span class="line">		* Support for Host-side USB</span><br><span class="line">		* USB Modem (CDC ACM) support</span><br><span class="line">		M USB Serial Converter support</span><br><span class="line">			* USB Generic Serial Driver</span><br><span class="line">			M USB driver for GSM and CDMA modems</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>编译选项</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">make menuconfig</span><br><span class="line">Kernel modules</span><br><span class="line">	USB Support</span><br><span class="line">		* kmod-usb-acm</span><br><span class="line">		* kmod-usb-net</span><br><span class="line">			* * * * all</span><br><span class="line">		* kmod-usb-net2280</span><br><span class="line">		* kmod-usb-ohci</span><br><span class="line">		* kmod-usb-serial</span><br><span class="line">			* * * * all</span><br><span class="line">		* kmod-usb-uhci</span><br><span class="line">		* kmod-usb-wdm</span><br><span class="line">		* kmod-usb2</span><br><span class="line">	Network</span><br><span class="line">		* WWAN</span><br><span class="line">			* comgt</span><br><span class="line">			* comgt-directip</span><br><span class="line">			* comgt-ncm</span><br><span class="line">			* uqmi</span><br><span class="line">		* chat</span><br><span class="line">		* ppp</span><br><span class="line">		* umbim</span><br><span class="line">		* wwan</span><br><span class="line">	Utilities</span><br><span class="line">		* usb-modeswitch</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>添加驱动支持</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">vim build_dir/target-mips_24kc_musl/linux-ar71xx_generic/linux<span class="number">-4.9</span><span class="number">.111</span>/drivers/usb/serial/option.c</span><br><span class="line"></span><br><span class="line"><span class="comment">// 添加 LONGSUNG U9300C 的 VID（0x1C9E）和PID（0x9B3C） </span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LONGSUNG_VENDOR_ID                      0x1C9E</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LONGSUNG_U9300_PRODUCT_ID               0x9B3C</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 禁止 interface 4 加载驱动</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">option_blacklist_info</span> &#123;</span></span><br><span class="line">        <span class="keyword">const</span> <span class="keyword">unsigned</span> <span class="keyword">long</span> sendsetup;</span><br><span class="line">        <span class="keyword">const</span> <span class="keyword">unsigned</span> <span class="keyword">long</span> reserved;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">const</span> <span class="class"><span class="keyword">struct</span> <span class="title">option_blacklist_info</span> <span class="title">longsung_u9300_blacklist</span> = &#123;</span></span><br><span class="line">        .reserved = BIT(<span class="number">4</span>),</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在 option_ids 数组中添加黑名单</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">const</span> <span class="class"><span class="keyword">struct</span> <span class="title">usb_device_id</span> <span class="title">option_ids</span>[] = &#123;</span></span><br><span class="line">    &#123; USB_DEVICE(LONGSUNG_VENDOR_ID,LONGSUNG_U9300_PRODUCT_ID),</span><br><span class="line">                .driver_info = (<span class="keyword">kernel_ulong_t</span>)&amp;longsung_u9300_blacklist&#125;,</span><br><span class="line">    	···</span><br><span class="line">	&#123;	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用 usb-serial.ko 驱动的用户,需要在 usb-serial.c 文件中的 usb_serial_probe()函数中增加如下判断来过滤NDIS接口</span></span><br><span class="line">vim build_dir/target-mips_24kc_musl/linux-ar71xx_generic/linux<span class="number">-4.9</span><span class="number">.111</span>/drivers/usb/serial/usb-serial.c</span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">int</span> usb_serial_probe(struct usb_interface *interface,</span><br><span class="line">                               <span class="keyword">const</span> struct usb_device_id *id)</span><br><span class="line">&#123;</span><br><span class="line">    ···</span><br><span class="line">    mutex_lock(&amp;table_lock);</span><br><span class="line">    <span class="comment">/*************LONGSUNG **************************/</span></span><br><span class="line">    <span class="keyword">if</span> ((le16_to_cpu(dev-&gt;descriptor.idVendor) == <span class="number">0x1C9E</span>) &amp;&amp;</span><br><span class="line">        (le16_to_cpu(dev-&gt;descriptor.idProduct) == <span class="number">0x9B3C</span>)) &#123;</span><br><span class="line">        <span class="keyword">if</span>(interface-&gt;cur_altsetting-&gt;desc.bInterfaceNumber == <span class="number">4</span>) &#123;</span><br><span class="line">            printk(KERN_INFO<span class="string">"Discover the 4th interface for U9300C NDIS.\n"</span>);</span><br><span class="line">            mutex_unlock(&amp;table_lock);</span><br><span class="line">            <span class="keyword">return</span> -ENODEV;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">	···</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>编译，刷写</p>
+</li>
+<li><p>验证</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> /dev/ 下出现 ttyUSB0-ttyUSB2 说明 U9300C 的驱动基本没问题</span><br><span class="line"><span class="meta">#</span> 注意：LONGSUNG U9300C 的串口中 AT(ttyUSB2)，Modem(ttyUSB1)可以发送 AT 命令，其它不能</span><br><span class="line"><span class="meta">#</span> 也可以通过在 Utilities --&gt; Termi --&gt; minicom 来调试</span><br><span class="line">cat /dev/ttyUSB2 &amp;</span><br><span class="line"><span class="meta">#</span> 查询版本信息</span><br><span class="line">echo AT+LCTSW &gt; /dev/ttyUSB2</span><br><span class="line"><span class="meta">#</span> 查询信号,将会得到信号强度和误码率信息</span><br><span class="line">echo AT+CSQ &gt; /dev/ttyUSB2</span><br><span class="line"><span class="meta">#</span> 查询注册状态</span><br><span class="line">echo AT+CREG? &gt; /dev/ttyUSB2</span><br><span class="line"><span class="meta">#</span> 网络运营商信息</span><br><span class="line">echo AT+COPS? &gt; /dev/ttyUSB2</span><br><span class="line"><span class="meta">#</span> 上述几个命令有输出就没问题</span><br><span class="line"><span class="meta">#</span> 查询网络运营商中</span><br><span class="line"><span class="meta">#</span> 中国移动 	-- 	"CHINA MOBILE"</span><br><span class="line"><span class="meta">#</span> 中国联通 	-- 	"CHN-UNICOM"/"UNICOM"</span><br><span class="line"><span class="meta">#</span> 中国电信	--	"CHN-CT"</span><br><span class="line">killall cat</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>启动</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/config/network</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 添加 电信-4G</span><br><span class="line">config interface '34g-ppp0'</span><br><span class="line">        option ifname 'ppp0'</span><br><span class="line">        option proto '3g'</span><br><span class="line">        option apn 'CTNET'</span><br><span class="line">        option service 'umts'</span><br><span class="line">        option dialnumber '*99#'</span><br><span class="line">        option username 'ctnet@mycdma.cn'</span><br><span class="line">        option password 'vnet.mobi'</span><br><span class="line">        option device '/dev/ttyUSB1'</span><br><span class="line">        option dns '114.114.114.114'</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 实测：移动和联通同样可以使用上面的配置</span><br><span class="line"><span class="meta">#</span> 移动apn为 CMNET 联通apn为 3GNET</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>添加/修改网络接口</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">vim package/base-files/files/bin/config_generate</span><br><span class="line"></span><br><span class="line"><span class="comment">// 默认为电信4G</span></span><br><span class="line">generate_static_network() &#123;</span><br><span class="line">+	uci -q batch &lt;&lt;-EOF</span><br><span class="line">+		set network.ppp0='interface'</span><br><span class="line">+		set network.ppp0.ifname='34G'</span><br><span class="line">+		set network.ppp0.proto='3g'</span><br><span class="line">+ 		set network.ppp0.apn='CTNET'</span><br><span class="line">+		set network.ppp0.service='umts'</span><br><span class="line">+		set network.ppp0.dialnumber='*99#'</span><br><span class="line">+		set network.ppp0.username='ctnet@mycdma.cn'</span><br><span class="line">+		set network.ppp0.password='vnet.mobi'</span><br><span class="line">+		set network.ppp0.device='/dev/ttyUSB1'</span><br><span class="line">+		set network.ppp0.dns='114.114.114.114'</span><br><span class="line">+	EOF</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>禁止 root 登录SSH</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">vim package/network/services/dropbear/files/dropbear.config</span><br><span class="line"></span><br><span class="line">config dropbear</span><br><span class="line">        option PasswordAuth 'on'</span><br><span class="line">        option RootPasswordAuth 'off'</span><br><span class="line">        option Port         '22'</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>添加用户</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 按照相同格式在一下文件中添加记录</span><br><span class="line">vim package/base-files/files/etc/passwd</span><br><span class="line">vim package/base-files/files/etc/shadow</span><br><span class="line">vim package/base-files/files/etc/group</span><br></pre></td></tr></table></figure>
 </li>
 <li></li>
 </ol>
@@ -1196,10 +1224,78 @@
 </li>
 <li><p>传输层一下的处理</p>
 <p>传输层：进行建立连接或断开连接的处理（会话层决定建立连接 和断开连接的时机，传输层进行实际的建立连接和断开连接），在两个主机间创建逻辑上的通信连接是传输层的主要作用，还会负责重发。保证数据传输的可靠性</p>
-<p>网络层：将数据传输给对端</p>
-<p>数据链路层、物理层：</p>
+<p>网络层：将数据传输给对端（根据目的地址，整体）</p>
+<p>数据链路层、物理层：将数据传输给对端（根据MAC地址，一个分段）</p>
 </li>
 </ol>
+<h3 id="传输方式"><a href="#传输方式" class="headerlink" title="传输方式"></a>传输方式</h3><p>大致分为面向有连接与无连接两种类型<br>面向无连接：以太网、IP、UDP协议等<br>面向有链接：ATM、帧中继、TCP协议等</p>
+<p>面向无连接：无需确认对端是否存在，发送端可随时发送数据</p>
+<p><img src="/2018/09/30/TCP-IP-详解（一）-网络基础知识/1544056962683.png" alt="1544056962683"></p>
+<p>面向有连接：在通信传输之前，先打开一个连接，连接被关闭是无法传输数据</p>
+<p><img src="/2018/09/30/TCP-IP-详解（一）-网络基础知识/1544057079751.png" alt="1544057079751"></p>
+<p>面向有连接型中，在发送数据之前，需要在收发主机之间连接一条通信线路（在不同的分层协议中，连接的具体含义可能有所不同。在数据链路层中的连接，就是指物理的、通信线路的连接。而传输层则负责创建与管理逻辑上的连接。），</p>
+<p>好比电话，输入对方号码拨出之后，只有对端拿起电话才能真正通话，通话结束之后将电话机扣上就如同切断电源。</p>
+<p>面向无连接型不要求建立和断开连接。发送端可于任何时候自由发送数据，但接收端不知道自己会在什么时候接收数据，所以，接收端需要常常确认是否收到了数据。类似于寄包裹。即使不知道对端是否存在或能否接收数据，发送端也能将数据发送出去。</p>
+<h3 id="电路交换与分组交换"><a href="#电路交换与分组交换" class="headerlink" title="电路交换与分组交换"></a>电路交换与分组交换</h3><p>目前，网络通信方式大致为两种——电路交换和分组交换。电路交换主要用于过去的电话网。TCP/IP技术采用了分组交换技术。</p>
+<p>电路交换：交换机负责数据的中转处理。计算机之间发送数据时，需要通过交换机与目标主机建立通信电路。我们将连接电路称为建立连接。建立好连接后，用户可以一直使用这条电路，知道该连接被断开（独占）。当有一条电路连接了多台计算机时，某一台计算机在收发信息时会独占整个电路，其他计算机只能等待这台计算机处理结束以后才有机会使用这条电路收发数据。并且在此过程中，谁也无法预测某一台计算机的数据传输从何时开始又在何时结束。如果并发用户数超过交换机之间的通信线路数，就意味着通信根本无法实现。</p>
+<p>分组交换：让连接到通信电路的计算机将所要发送的数据分成多个数据包，按照一定的顺序排列之后分别发送。这就是分组交换。有了分组交换，数据被细分后，所有的计算机就可以一齐收发数据，这样也就提高了通信线路的利用率。由于在分组的过程中，已经在每个分组的首部写入了发送端和接收端的地址，所以即使同一条线路同时为多 个用户提供服务，也可以明确区分每个分组数据发往的目的地，以及它是与哪台计算机进行的通信。</p>
+<p><img src="/2018/09/30/TCP-IP-详解（一）-网络基础知识/1544059657894.png" alt="1544059657894"></p>
+<p>在分组交换 中，由分组交换机（路由器）连接通信线路。分组交换的大致处理过程是：发送端计算机将数据分组发送给路由器，路由器收到这些分组数据以后，缓存到自己的缓冲区，然后再转发给目标 计算机。因此，分组交换也有另一个名称：蓄积交换。</p>
+<p>路由器接收到数据以后会按照顺序缓存到相应的队列当中，再以<code>先进先出</code>的顺序将它们逐一发送出去（有时，也会优先发送目标地址比较特殊的数据）。</p>
+<p>在分组交换中，计算机与路由器之间以及路由器与路由器之间通常只有一条通信线路。因此，这条线路其实是一条 共享线路。在电路交换中，计算机之间的传输速度不变。然而在分组交换中，通信线路的速度可能会有所不同。根据网络拥堵的情况，数据达到目标地址的时间有长有短。另外，路由器的缓存饱和或溢出时，甚至可能会发生分组数据丢失、无法发送到对端的情况。</p>
+<h3 id="根据接收端数量分类"><a href="#根据接收端数量分类" class="headerlink" title="根据接收端数量分类"></a>根据接收端数量分类</h3><p>单播（Unicast）：1对1通信，固定电话</p>
+<p>广播（Broadcast）：1对多，电视播放。广播范围-广播域</p>
+<p>多播（Multicast）：1对多，但是要限制接收端，电话会议（需要限定成员）</p>
+<p>任播（Anycast）：1对1，在一堆客户端中选取最适合的一个进行通信，DNS根域名解析服务器。</p>
+<h3 id="地址"><a href="#地址" class="headerlink" title="地址"></a>地址</h3><p>每一层协议使用的地址都不相同。</p>
+<p>TCP/IP通信中使用MAC地址、IP地址、端口号等信息作为地址标识。在应用层可以将电子邮件地址作为网络通信地址</p>
+<p>地址应具有唯一性：在同一通信网络中不允许有两个相同地址的通信主体存在</p>
+<p>地址具有层次性：地址总数越来越多的时候，为了高效快速的找出通信地址的目标地址将成为一个重要的问题。IP地址具有层次性，MAC地址不具有。</p>
+<p>IP地址的分层：IP地址由网络号和主机号两部分组成。即使通信主体的IP地址不同，若主机号不同、网络号相同，说明他们处于同一网段。通常，同处于一个网段的主机也都属于同一个部门或集团组织，另一方面， 网络号相同的主机在组织结构、提供商类型和地域分布上都比较集中，也为 IP 寻址带来了极大的方便（聚合性）</p>
+<p>网络传输中，每个节点会根据分组数据的地址信息，来判断该报文应该由哪个网卡发送出去。为此，各个地址会参考一个发出接口列表。在这一点上MAC寻址与IP寻址是一样的。只不过MAC寻址中所参考的这张表叫做<code>地址转发表</code>，而IP寻址中所参考的叫做<code>路由控制表</code>，目前地址转发表和路由控制表并不需要在网络中的各个节点上手动设置， 而是由这些节点自动生成的。</p>
+<p>地址转发表根据自学自动 成。 路由控制表则根据路由协议自动生成。</p>
+<p>MAC地址转发表中所记录的是实际的MAC地址本身，而路由表中记录的IP地址则是集中了之后的网络号（确切的说，是网络号与子网掩码）。</p>
+<p><img src="/2018/09/30/TCP-IP-详解（一）-网络基础知识/1544062824072.png" alt="1544062824072"></p>
+<h3 id="网络的构成要素"><a href="#网络的构成要素" class="headerlink" title="网络的构成要素"></a>网络的构成要素</h3><p>介绍连接计算机与计算机的硬件设备。</p>
+<table>
+<thead>
+<tr>
+<th>设备</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>网卡</td>
+<td>使计算机联网的设备（Network Interface）</td>
+</tr>
+<tr>
+<td>中继器（Repeater）</td>
+<td>从物理层上延长网络的设备</td>
+</tr>
+<tr>
+<td>网桥（Bridge）/2层交换机</td>
+<td>从数据链路层上延长网络的设备</td>
+</tr>
+<tr>
+<td>路由器（Router）/3层交换机</td>
+<td>从网络层转发分组数据的设备</td>
+</tr>
+<tr>
+<td>4-7层交换机</td>
+<td>处理传输层以上各层网络传输的设备</td>
+</tr>
+<tr>
+<td>网关（Gateway）</td>
+<td>转换协议的设备</td>
+</tr>
+</tbody>
+</table>
+<p>网卡（网络接口卡，NIC）</p>
+<p>中继器（Repeater）：中继器（Repeater）是在OSI模型的第1层——物理层面上延长网络的设备。由电缆传过来的电信号或光信号经由中继器的波形调整和放大再传给另一个电缆。</p>
+<p>一般情况下，中继器的两端连接的是相同的通信媒介，但有的中继器也可以完成不同媒介之间的转接工作，但是这种中继器只能单纯的负责信号在0、1比特流之间的转换，并不负责判断数据是否有错误</p>
+<p>有些中继器可以提供多个端口服务。这种中继器被称作中继集线器或集线器。因此，集线器（中继集线器也可以简称为集线器或Hub）也可以看作是多口中继器</p>
+<p>网桥：网桥是在OSI模型的第2层——数据链路层面上连接两个网络的设备。它能够识别数据链路层中的数据帧（与分组数据意思大致相同，但是在数据链路层中通常习惯称为帧），并将这些数据帧临时存储于内存，再重新生成信号作为一个全新的帧转发给相连的另一个网段</p>
 
       
     </div>
