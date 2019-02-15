@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-02-14T13:54:23.736Z</updated>
+  <updated>2019-02-15T02:00:59.966Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -21,19 +21,17 @@
     <link href="http://yoursite.com/2018/12/05/openwrt%E8%B8%A9%E5%9D%91/"/>
     <id>http://yoursite.com/2018/12/05/openwrt踩坑/</id>
     <published>2018-12-05T10:59:56.000Z</published>
-    <updated>2019-02-14T13:54:23.736Z</updated>
+    <updated>2019-02-15T02:00:59.966Z</updated>
     
     <summary type="html">
     
-      &lt;h2 id=&quot;OpenWrt踩坑&quot;&gt;&lt;a href=&quot;#OpenWrt踩坑&quot; class=&quot;headerlink&quot; title=&quot;OpenWrt踩坑&quot;&gt;&lt;/a&gt;OpenWrt踩坑&lt;/h2&gt;&lt;ol&gt;
+      &lt;ol&gt;
 &lt;li&gt;&lt;p&gt;默认添加iptables规则&lt;/p&gt;
 &lt;figure class=&quot;highlight shell&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;vim package/network/config/firewall/files/firewall.user&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;+		iptables -t nat -A POSTROUTING -s 192.168.1.0/24 -o tun0 -j MASQUERADE&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
     
     </summary>
-    
-      <category term="openwrt" scheme="http://yoursite.com/categories/openwrt/"/>
     
     
       <category term="openwrt" scheme="http://yoursite.com/tags/openwrt/"/>
@@ -47,17 +45,15 @@
     <link href="http://yoursite.com/2018/11/18/%E6%96%87%E4%BB%B6%E7%B1%BB%E5%9E%8B%E5%AE%9A%E4%B9%89-DTD/"/>
     <id>http://yoursite.com/2018/11/18/文件类型定义-DTD/</id>
     <published>2018-11-18T11:23:00.000Z</published>
-    <updated>2019-02-14T13:53:08.770Z</updated>
+    <updated>2019-02-15T02:01:54.415Z</updated>
     
     <summary type="html">
     
-      &lt;h2 id=&quot;DTD文件类型定义&quot;&gt;&lt;a href=&quot;#DTD文件类型定义&quot; class=&quot;headerlink&quot; title=&quot;DTD文件类型定义&quot;&gt;&lt;/a&gt;DTD文件类型定义&lt;/h2&gt;&lt;p&gt;###简介&lt;/p&gt;
+      &lt;p&gt;###简介&lt;/p&gt;
 &lt;p&gt;文档类型定义（DTD）可定义合法的XML文档构建模块&lt;/p&gt;
 &lt;p&gt;它使用一系列合法的元素来&lt;code&gt;定义文档的结构&lt;/code&gt;&lt;/p&gt;
     
     </summary>
-    
-      <category term="语言" scheme="http://yoursite.com/categories/%E8%AF%AD%E8%A8%80/"/>
     
     
       <category term="DTD" scheme="http://yoursite.com/tags/DTD/"/>
@@ -71,7 +67,7 @@
     <link href="http://yoursite.com/2018/10/10/%E8%81%9A%E7%B1%BB/"/>
     <id>http://yoursite.com/2018/10/10/聚类/</id>
     <published>2018-10-10T14:55:07.000Z</published>
-    <updated>2019-02-14T13:48:05.815Z</updated>
+    <updated>2019-02-15T02:01:28.989Z</updated>
     
     <summary type="html">
     
@@ -89,8 +85,6 @@
     
     </summary>
     
-      <category term="大数据" scheme="http://yoursite.com/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
-    
     
       <category term="聚类" scheme="http://yoursite.com/tags/%E8%81%9A%E7%B1%BB/"/>
     
@@ -101,7 +95,7 @@
     <link href="http://yoursite.com/2018/10/09/HMAC%E7%AE%97%E6%B3%95/"/>
     <id>http://yoursite.com/2018/10/09/HMAC算法/</id>
     <published>2018-10-09T13:25:29.000Z</published>
-    <updated>2019-02-14T13:48:57.376Z</updated>
+    <updated>2019-02-15T02:00:44.199Z</updated>
     
     <summary type="html">
     
@@ -109,8 +103,6 @@
 &lt;p&gt;MAC由消息本身和一个密钥经过一系列计算产生，用于生成MAC的算法，称为MAC算法。&lt;/p&gt;
     
     </summary>
-    
-      <category term="安全协议" scheme="http://yoursite.com/categories/%E5%AE%89%E5%85%A8%E5%8D%8F%E8%AE%AE/"/>
     
     
       <category term="安全协议" scheme="http://yoursite.com/tags/%E5%AE%89%E5%85%A8%E5%8D%8F%E8%AE%AE/"/>
@@ -122,15 +114,13 @@
     <link href="http://yoursite.com/2018/10/09/DH-Diffie%E2%80%93Hellman-%E7%AE%97%E6%B3%95/"/>
     <id>http://yoursite.com/2018/10/09/DH-Diffie–Hellman-算法/</id>
     <published>2018-10-09T09:49:24.000Z</published>
-    <updated>2019-02-14T13:42:16.257Z</updated>
+    <updated>2019-02-15T02:00:18.475Z</updated>
     
     <summary type="html">
     
       &lt;h2 id=&quot;DH密钥协商（Diffie–Hellman-key-exchange）算法&quot;&gt;&lt;a href=&quot;#DH密钥协商（Diffie–Hellman-key-exchange）算法&quot; class=&quot;headerlink&quot; title=&quot;DH密钥协商（Diffie–Hellman key exchange）算法&quot;&gt;&lt;/a&gt;DH密钥协商（Diffie–Hellman key exchange）算法&lt;/h2&gt;&lt;p&gt;DH 是 Diffie-Hellman的首字母缩写，是Whitefield与Martin Hellman在1976年提出了一个的密钥协商协议。其安全性源于在有限域上计算离散对数。该算法可以使两个用户之间安全地交换一个密钥，但不能用于加密或解密信息。&lt;/p&gt;
     
     </summary>
-    
-      <category term="协议" scheme="http://yoursite.com/categories/%E5%8D%8F%E8%AE%AE/"/>
     
     
       <category term="安全协议" scheme="http://yoursite.com/tags/%E5%AE%89%E5%85%A8%E5%8D%8F%E8%AE%AE/"/>
@@ -142,16 +132,14 @@
     <link href="http://yoursite.com/2018/10/09/%E5%BF%AB%E9%80%9F%E5%B9%82%E7%AE%97%E6%B3%95/"/>
     <id>http://yoursite.com/2018/10/09/快速幂算法/</id>
     <published>2018-10-09T02:56:15.000Z</published>
-    <updated>2019-02-14T13:51:27.523Z</updated>
+    <updated>2019-02-15T02:01:41.285Z</updated>
     
     <summary type="html">
     
-      &lt;h2 id=&quot;快速幂算法&quot;&gt;&lt;a href=&quot;#快速幂算法&quot; class=&quot;headerlink&quot; title=&quot;快速幂算法&quot;&gt;&lt;/a&gt;快速幂算法&lt;/h2&gt;&lt;h4 id=&quot;平方乘算法&quot;&gt;&lt;a href=&quot;#平方乘算法&quot; class=&quot;headerlink&quot; title=&quot;平方乘算法&quot;&gt;&lt;/a&gt;平方乘算法&lt;/h4&gt;&lt;p&gt;RSA 加解密中存在指数运算 X^a。通常解密运算中的指数非常大，a 的二进制位数通常会大于等于1024 bit，即可能 a &amp;gt;= 2^1024。如果用一般方法直接计算 X^a 的值， 即 X*X*X……需要的运算量非常大，很容易溢出。&lt;/p&gt;
+      &lt;h4 id=&quot;平方乘算法&quot;&gt;&lt;a href=&quot;#平方乘算法&quot; class=&quot;headerlink&quot; title=&quot;平方乘算法&quot;&gt;&lt;/a&gt;平方乘算法&lt;/h4&gt;&lt;p&gt;RSA 加解密中存在指数运算 X^a。通常解密运算中的指数非常大，a 的二进制位数通常会大于等于1024 bit，即可能 a &amp;gt;= 2^1024。如果用一般方法直接计算 X^a 的值， 即 X*X*X……需要的运算量非常大，很容易溢出。&lt;/p&gt;
 &lt;p&gt;定义：MUL 为乘法运算即乘以 X，sq 为平方运算&lt;/p&gt;
     
     </summary>
-    
-      <category term="密码学" scheme="http://yoursite.com/categories/%E5%AF%86%E7%A0%81%E5%AD%A6/"/>
     
     
       <category term="密码学" scheme="http://yoursite.com/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/"/>
@@ -165,17 +153,15 @@
     <link href="http://yoursite.com/2018/09/30/TCP-IP-%E8%AF%A6%E8%A7%A3%EF%BC%88%E4%B8%80%EF%BC%89-%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
     <id>http://yoursite.com/2018/09/30/TCP-IP-详解（一）-网络基础知识/</id>
     <published>2018-09-30T01:25:20.000Z</published>
-    <updated>2019-02-14T13:45:59.947Z</updated>
+    <updated>2019-02-15T02:01:19.271Z</updated>
     
     <summary type="html">
     
-      &lt;h2 id=&quot;TCP-IP-详解（一）-网络基础知识&quot;&gt;&lt;a href=&quot;#TCP-IP-详解（一）-网络基础知识&quot; class=&quot;headerlink&quot; title=&quot;TCP/IP 详解（一） 网络基础知识&quot;&gt;&lt;/a&gt;TCP/IP 详解（一） 网络基础知识&lt;/h2&gt;&lt;h3 id=&quot;1-计算机网络发展&quot;&gt;&lt;a href=&quot;#1-计算机网络发展&quot; class=&quot;headerlink&quot; title=&quot;1. 计算机网络发展&quot;&gt;&lt;/a&gt;1. 计算机网络发展&lt;/h3&gt;&lt;p&gt;计算机发展是从&lt;code&gt;独立模式&lt;/code&gt;到&lt;code&gt;网络互连模式&lt;/code&gt;的。&lt;/p&gt;
+      &lt;h3 id=&quot;1-计算机网络发展&quot;&gt;&lt;a href=&quot;#1-计算机网络发展&quot; class=&quot;headerlink&quot; title=&quot;1. 计算机网络发展&quot;&gt;&lt;/a&gt;1. 计算机网络发展&lt;/h3&gt;&lt;p&gt;计算机发展是从&lt;code&gt;独立模式&lt;/code&gt;到&lt;code&gt;网络互连模式&lt;/code&gt;的。&lt;/p&gt;
 &lt;p&gt;​    独立模式：单机模式，指计算机未连接网络，各自独立使用的方式&lt;/p&gt;
 &lt;p&gt;​    网络互联模式：将计算机连在一起，形成一个计算机网络，信息共享、传递消息等&lt;/p&gt;
     
     </summary>
-    
-      <category term="TCP/IP协议" scheme="http://yoursite.com/categories/TCP-IP%E5%8D%8F%E8%AE%AE/"/>
     
     
       <category term="TCP/IP详解" scheme="http://yoursite.com/tags/TCP-IP%E8%AF%A6%E8%A7%A3/"/>
@@ -187,15 +173,13 @@
     <link href="http://yoursite.com/2018/09/27/Hello-World/"/>
     <id>http://yoursite.com/2018/09/27/Hello-World/</id>
     <published>2018-09-27T13:30:31.000Z</published>
-    <updated>2019-02-14T13:47:04.436Z</updated>
+    <updated>2019-02-15T02:00:33.177Z</updated>
     
     <summary type="html">
     
-      &lt;h2 id=&quot;Hello-World&quot;&gt;&lt;a href=&quot;#Hello-World&quot; class=&quot;headerlink&quot; title=&quot;Hello World&quot;&gt;&lt;/a&gt;Hello World&lt;/h2&gt;&lt;h3 id=&quot;Test-code-The-first-C-program&quot;&gt;&lt;a href=&quot;#Test-code-The-first-C-program&quot; class=&quot;headerlink&quot; title=&quot;Test code - The first C program&quot;&gt;&lt;/a&gt;Test code - The first C program&lt;/h3&gt;
+      &lt;h2 id=&quot;Hello-World&quot;&gt;&lt;a href=&quot;#Hello-World&quot; class=&quot;headerlink&quot; title=&quot;Hello World&quot;&gt;&lt;/a&gt;Hello World&lt;/h2&gt;&lt;h3 id=&quot;Test-code&quot;&gt;&lt;a href=&quot;#Test-code&quot; class=&quot;headerlink&quot; title=&quot;Test code&quot;&gt;&lt;/a&gt;Test code&lt;/h3&gt;
     
     </summary>
-    
-      <category term="test" scheme="http://yoursite.com/categories/test/"/>
     
     
       <category term="test" scheme="http://yoursite.com/tags/test/"/>
