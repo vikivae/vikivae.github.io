@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-02-21T12:19:47.760Z</updated>
+  <updated>2019-02-21T12:22:49.276Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="http://yoursite.com/2019/02/21/vim%E6%96%87%E4%BB%B6%E5%A4%B4%E9%85%8D%E7%BD%AE/"/>
     <id>http://yoursite.com/2019/02/21/vim文件头配置/</id>
     <published>2019-02-21T12:00:30.000Z</published>
-    <updated>2019-02-21T12:19:47.760Z</updated>
+    <updated>2019-02-21T12:22:49.276Z</updated>
     
     <summary type="html">
     
@@ -39,15 +39,11 @@
     <link href="http://yoursite.com/2018/12/05/openwrt%E8%B8%A9%E5%9D%91/"/>
     <id>http://yoursite.com/2018/12/05/openwrt踩坑/</id>
     <published>2018-12-05T10:59:56.000Z</published>
-    <updated>2019-02-15T02:00:59.966Z</updated>
+    <updated>2019-03-01T01:39:09.437Z</updated>
     
     <summary type="html">
     
-      &lt;ol&gt;
-&lt;li&gt;&lt;p&gt;默认添加iptables规则&lt;/p&gt;
-&lt;figure class=&quot;highlight shell&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;vim package/network/config/firewall/files/firewall.user&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;+		iptables -t nat -A POSTROUTING -s 192.168.1.0/24 -o tun0 -j MASQUERADE&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
+      &lt;h3 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h3&gt;&lt;p&gt;由于业务上的需求，本来在做Android开发的我直接被从零开始，搞了几个月的OpenWrt。哇，本来还有点小激动，结果没人带，每天都是在 查资料 - 改代码 - 刷固件 - 查资料 循环。还好最后不负众望，现在总结一下被OpenWrt折磨的几个月的东西。&lt;/p&gt;
     
     </summary>
     
