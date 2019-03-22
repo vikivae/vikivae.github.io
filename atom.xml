@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>鱼塘</title>
+  <title>可爱</title>
   
-  <subtitle>好多好多好多鱼</subtitle>
+  <subtitle>大可爱</subtitle>
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
@@ -10,7 +10,7 @@
   <id>http://yoursite.com/</id>
   
   <author>
-    <name>最咸的鱼</name>
+    <name>小可爱</name>
     
   </author>
   
@@ -31,26 +31,6 @@
     
     
       <category term="vim" scheme="http://yoursite.com/tags/vim/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>openwrt踩坑</title>
-    <link href="http://yoursite.com/2018/12/05/openwrt%E8%B8%A9%E5%9D%91/"/>
-    <id>http://yoursite.com/2018/12/05/openwrt踩坑/</id>
-    <published>2018-12-05T10:59:56.000Z</published>
-    <updated>2019-03-11T08:22:47.926Z</updated>
-    
-    <summary type="html">
-    
-      &lt;h3 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h3&gt;&lt;p&gt;由于业务上的需求，本来在做Android开发的我直接被从零开始，搞了几个月的OpenWrt。哇，本来还有点小激动，结果没人带，每天都是在 查资料 - 改代码 - 刷固件 - 查资料 循环。还好最后不负众望，现在总结一下被OpenWrt折磨的几个月的东西。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="openwrt" scheme="http://yoursite.com/tags/openwrt/"/>
-    
-      <category term="配置" scheme="http://yoursite.com/tags/%E9%85%8D%E7%BD%AE/"/>
     
   </entry>
   
@@ -158,26 +138,6 @@
       <category term="密码学" scheme="http://yoursite.com/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/"/>
     
       <category term="算法" scheme="http://yoursite.com/tags/%E7%AE%97%E6%B3%95/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>TCP/IP 详解（一） 网络基础知识</title>
-    <link href="http://yoursite.com/2018/09/30/TCP-IP-%E8%AF%A6%E8%A7%A3%EF%BC%88%E4%B8%80%EF%BC%89-%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
-    <id>http://yoursite.com/2018/09/30/TCP-IP-详解（一）-网络基础知识/</id>
-    <published>2018-09-30T01:25:20.000Z</published>
-    <updated>2019-02-15T02:01:19.271Z</updated>
-    
-    <summary type="html">
-    
-      &lt;h3 id=&quot;1-计算机网络发展&quot;&gt;&lt;a href=&quot;#1-计算机网络发展&quot; class=&quot;headerlink&quot; title=&quot;1. 计算机网络发展&quot;&gt;&lt;/a&gt;1. 计算机网络发展&lt;/h3&gt;&lt;p&gt;计算机发展是从&lt;code&gt;独立模式&lt;/code&gt;到&lt;code&gt;网络互连模式&lt;/code&gt;的。&lt;/p&gt;
-&lt;p&gt;​    独立模式：单机模式，指计算机未连接网络，各自独立使用的方式&lt;/p&gt;
-&lt;p&gt;​    网络互联模式：将计算机连在一起，形成一个计算机网络，信息共享、传递消息等&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="TCP/IP详解" scheme="http://yoursite.com/tags/TCP-IP%E8%AF%A6%E8%A7%A3/"/>
     
   </entry>
   
